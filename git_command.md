@@ -24,3 +24,4 @@ git pull origin 원격브랜치명
 220226_whkwon feature to dev test
 220226_chlee fork
 220226 kwh is stupid
+220226 jts nagara
