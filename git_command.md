@@ -13,16 +13,11 @@ git branch -d 브랜치명
 git checkout  
 
 로컬에 브랜치 생성하며 동시에 이동  
-git checkout -b  
-
-로컬에서 원격에 브랜치 생성하기  
-git push origin —delete 브랜치명  
+git checkout -b 
 
 원격의 브랜치를 로컬에 받기  
 git pull origin 원격브랜치명  
 
-승재 test
 
-tmdwo test1
-
-qkrtmdwo1
+==============테스트==============
+220226_whkwon dev to main test
