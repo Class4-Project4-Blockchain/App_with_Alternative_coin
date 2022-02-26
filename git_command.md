@@ -21,3 +21,10 @@ git pull origin 원격브랜치명
 
 ==============테스트==============
 220226_whkwon dev to main test
+220226_whkwon feature to dev test
+220226_chlee fork
+220226 kwh is stupid
+220226 jts nagara
+220226_asj
+    - 항상 작업 전에는 터미널에 git pull origin dev 를 사용하여 다른 작업자의 작업내용을 확인한 후
+    - 작업하여야 줄겹침에 대한 이슈를 피하기 좋다.
