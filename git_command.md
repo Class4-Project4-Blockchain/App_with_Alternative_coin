@@ -27,5 +27,6 @@ git pull origin 원격브랜치명
 220226 jts nagara
 220226_asj
 220226_cmg
+220226_whkwon goorm_git_test
     - 항상 작업 전에는 터미널에 git pull origin dev 를 사용하여 다른 작업자의 작업내용을 확인한 후
     - 작업하여야 줄겹침에 대한 이슈를 피하기 좋다.
