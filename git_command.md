@@ -34,3 +34,4 @@ git pull origin 원격브랜치명
 	
 	
 220227_whkwon goorm_git_test-2
+220227_whkwon goorm_git_test-3
