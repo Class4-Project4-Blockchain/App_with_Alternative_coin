@@ -36,7 +36,15 @@ git pull origin 원격브랜치명
     - 작업하여야 줄겹침에 대한 이슈를 피하기 좋다.
 220228 tss
 220228 new
+<<<<<<< HEAD
 220228 cmg goorm git test
 220228 cmg goorm git test2
 220228 cmg goorm git test3
 	
+=======
+
+
+
+
+220228 권원현 -> 조민경(구름) 테스트
+>>>>>>> 5f711d254acb769a4e82873f66c1b319ba596ef8
