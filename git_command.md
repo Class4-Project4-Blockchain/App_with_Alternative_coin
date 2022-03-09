@@ -41,3 +41,5 @@ git pull origin 원격브랜치명
 220228 cmg goorm git test3
 220228 권원현 -> 조민경(구름) 테스트
 220303 정태수 테스트
+220309 권원현 goorm git test(fail to pull request)
+220309 권원현 goorm git test(다시 vscode에서 받고 pull request try)
