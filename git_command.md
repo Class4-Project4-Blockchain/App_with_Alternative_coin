@@ -43,3 +43,4 @@ git pull origin 원격브랜치명
 220303 정태수 테스트
 220309 권원현 goorm git test(fail to pull request)
 220309 권원현 goorm git test(다시 vscode에서 받고 pull request try)
+220311 권원현 goorm git test(remote ssh url 수정 후 push)
