@@ -1,0 +1,7 @@
+{
+    "host" : "15.165.124.23",
+    "user" : "root",
+    "password" : "1234",
+    "database" : "project4_altcoin",
+    "commitLimit" : 100
+}
