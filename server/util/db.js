@@ -10,6 +10,7 @@ const getConn = (callback) => {
         
         callback(connection);
     });
+    
 };
 // ↑ 모듈화 시킨 부분
 

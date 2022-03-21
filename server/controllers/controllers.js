@@ -10,7 +10,12 @@ module.exports = {
     },
     
     wApi: {
-        getTest: (req, res) => console.log("/mywallet url test ok")
+        getTest: (req, res) => {
+            let result = testModel.getSelected();
+            res.json(result);
+            console.log('test ok!');
+            console.log(result);
+        }
     },
 
     uApi: {
