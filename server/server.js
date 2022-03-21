@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 // const users = require('./routes/users');
 const exchange = require('./routes/exchange');
-// const mywallet = require('./routes/mywallet');
+const mywallet = require('./routes/mywallet');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
