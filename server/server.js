@@ -18,5 +18,3 @@ const host = '127.0.0.1';
 const port = 3001;
 
 app.listen(port, () => console.log(`Node.js server is running at http://${host}:${port}/`));
-
-// git test 조민경 goorm
