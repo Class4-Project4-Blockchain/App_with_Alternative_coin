@@ -13,7 +13,6 @@ app.use(cors());
 app.use('/users', users);
 app.use('/exchange', exchange);
 app.use('/mywallet', mywallet);
-//  세팅다되면 주석해제
 
 const host = 'localhost';
 const port = 3001;
