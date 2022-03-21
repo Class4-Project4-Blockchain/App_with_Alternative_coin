@@ -3,6 +3,6 @@
     "user" : "root",
     "password" : "1234",
     "database" : "project4_altcoin",
-    "commitLimit" : 100,
-    "connectTimeout": 30000
+    "port" : "56520",
+    "commitLimit" : 100
 }

@@ -1,25 +1,19 @@
-const testModel = require('../models/models');
+const testModel = require("../models/models");
+const con = require("../util/db");
 
 module.exports = {
-    eApi: {
-        getTest: (req, res) => {
-            let result = testModel.getRead();
-            res.json(result);
-            console.log("test ok");
-        },
+  eApi: {
+    getTest: async (req, res) => {
+      let result = await testModel.getRead();
+      console.log(result);
     },
-    
-    wApi: {
-        getTest: (req, res) => {
-            let result = testModel.getSelected();
-            res.json(result);
-            console.log('test ok!');
-            console.log(result);
-        }
-    },
+  },
 
-    uApi: {
-        getTest: (req, res) => console.log("/user url test Ok")
-    }  
+  wApi: {
+    getTest: (req, res) => console.log("/mywallet url test ok"),
+  },
 
+  uApi: {
+    getTest: (req, res) => console.log("/user url test Ok"),
+  },
 };

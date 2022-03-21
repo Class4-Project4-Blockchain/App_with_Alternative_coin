@@ -1,18 +1,29 @@
 const mysql = require('mysql');
 const dbConfig = require('./dbConfig.json');
-const con = mysql.createPool(dbConfig);
+require('dotenv').config();
 
-// ↓ 모듈화 시킨 부분(공통 부분)
-const getConn = (callback) => {
+const dbConf = { // 왜 안읽히지?? 일단 보류
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DB,
+    port: process.env.PORT,
+    commitLimit: process.env.COMMITLIMIT
+}
+
+console.log(process.env.HOST); // undefined
+
+const con = mysql.createPool(dbConf);
+
+const getConn = function(callback) {
     con.getConnection((err, connection) => {
-        if(err) throw err;
+        if(err) {console.error(err)}
         console.log("Connection Success");
         
         callback(connection);
     });
     
 };
-// ↑ 모듈화 시킨 부분
 
 getConn;
 
