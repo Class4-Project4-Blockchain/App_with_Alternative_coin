@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-// const users = require('./routes/users');
+const users = require('./routes/users');
 const exchange = require('./routes/exchange');
 const mywallet = require('./routes/mywallet');
 
@@ -10,9 +10,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-// app.use('/users', users);
+app.use('/users', users);
 app.use('/exchange', exchange);
- app.use('/mywallet', mywallet); 
+app.use('/mywallet', mywallet);
 //  세팅다되면 주석해제
 
 const host = 'localhost';

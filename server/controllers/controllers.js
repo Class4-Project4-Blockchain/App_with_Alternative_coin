@@ -7,6 +7,11 @@ module.exports = {
     
     wApi: {
         getTest: (req, res) => console.log("/mywallet url test ok")
-    }
-    
+    },
+
+    uApi: {
+        getTest: (req, res) => console.log("/user url test Ok")
+    }  
+
 };
+
