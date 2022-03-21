@@ -12,9 +12,12 @@ app.use(cors());
 
 // app.use('/users', users);
 app.use('/exchange', exchange);
-// app.use('/mywallet', mywallet);
+ app.use('/mywallet', mywallet); 
+//  세팅다되면 주석해제
 
 const host = '127.0.0.1';
 const port = 3001;
 
 app.listen(port, () => console.log(`Node.js server is running at http://${host}:${port}/`));
+
+// git test 조민경 goorm
