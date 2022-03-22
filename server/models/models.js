@@ -1,4 +1,4 @@
-const getConn = require('../util/db');
+const getConn = require('./db');
 
 exports.getRead = () => {
     return new Promise((resolve, reject) => {
