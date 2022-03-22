@@ -1,5 +1,4 @@
 const testModel = require("../models/models");
-const con = require("../util/db");
 
 module.exports = {
   eApi: {
