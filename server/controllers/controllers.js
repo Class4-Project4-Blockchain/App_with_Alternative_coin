@@ -16,18 +16,18 @@ module.exports = {
   },
 
   wiApi: { //db에 insert 
-    getTest: async (req, res) => {
+    getInsert: async (req, res) => {
         let result = await testModel.getInserted();
         console.log(result);
       },
   },
 
-//   wdApi: { //db에 delete
-//     getTest: async (req, res) => {
-//         let result = await testModel.getDeleted();
-//         console.log(result);
-//       },
-//   },
+  wdApi: { //db에 delete
+    getDelete: async (req, res) => {
+        let result = await testModel.getDeleted();
+        console.log(result);
+      },
+  },
 
   uApi: {
     getTest: (req, res) => console.log("/user url test Ok"),
