@@ -13,7 +13,7 @@ const dbConf = { // 왜 안읽히지?? 일단 보류
 
 console.log(process.env.HOST); // undefined
 
-const con = mysql.createPool(dbConf);
+const con = mysql.createPool(dbConfig); //dbConf
 
 const getConn = function(callback) {
     con.getConnection((err, connection) => {
