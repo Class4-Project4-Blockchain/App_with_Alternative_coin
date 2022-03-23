@@ -24,7 +24,7 @@ exports.getSelected = () => {
                 con.release();
             
             } catch (err) { // 실패
-                console.err(err);
+                console.error(err);
             };
         });
     });
@@ -40,7 +40,7 @@ exports.getInserted = () =>{
                 con.release();
                 console.log(result);
             } catch (err) { // 실패
-                // console.err(err);
+                console.log(error);
             };
         });
     });
@@ -56,7 +56,7 @@ exports.getDeleted = () =>{
                 con.release();
                 console.log(result);
             } catch (err) { // 실패
-                // console.err(err);
+                console.error(err);
             };
         });
     });
