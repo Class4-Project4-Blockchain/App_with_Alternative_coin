@@ -1,12 +1,20 @@
 import './assets/css/App.css';
 import { Routes, Route } from 'react-router-dom';
 import Reference from './components/pages/Reference.js';
+import Auth from 'library/utils/auth';
+
+const MyPage = loadable(() => import('pages/MyPage'));
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(startInit());
+  }, [dispatch]);
   return (
     <>
         <Routes>
               <Route path="/" element={<Reference/>}/>
+              <Route path="/mypage" component={Auth(MyPage, true)} />
         </Routes>
     </>
   );
