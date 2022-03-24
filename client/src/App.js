@@ -1,9 +1,7 @@
 import './assets/css/App.css';
 import { Routes, Route } from 'react-router-dom';
 import Reference from './components/pages/Reference.js';
-
-
-const MyPage = (() => import('./components/pages/MyPage'));
+import MyPage from './components/pages/MyPage.js';
 
 function App() {  
   return (
