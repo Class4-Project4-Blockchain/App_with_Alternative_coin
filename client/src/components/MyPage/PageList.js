@@ -10,10 +10,10 @@ function PageList() {
           <MyPageTitle>계정</MyPageTitle>
           <MyPageList>
             <li>
-              <Link to="/mypage/email">이메일 변경</Link>
+              <Link to="/mypage/email">이메일변경</Link>
             </li>
             <li>
-              <Link to="/mypage/password">비밀번호 변경</Link>
+              <Link to="/mypage/password">비밀번호변경</Link>
             </li>
             <li>
               <Link to="/mypage/withdrawal">회원탈퇴</Link>
@@ -24,16 +24,16 @@ function PageList() {
           <MyPageTitle>지갑 관리</MyPageTitle>
           <MyPageList>
             <li>
-              <Link to="/mypage/wallet">지갑 생성</Link>
+              <Link to="/mypage/wallet">지갑생성</Link>
             </li>
             <li>
-              <Link to="/mypage/walletdelete">지갑 삭제</Link>
+              <Link to="/mypage/walletdelete">지갑삭제</Link>
             </li>
             <li>
-              <Link to="/mypage/coinsend">코인 송금</Link>
+              <Link to="/mypage/coinsend">코인보내기</Link>
             </li>
             <li>
-              <Link to="/mypage/sendresult">송금 내역</Link>
+              <Link to="/mypage/sendresult">송금내역</Link>
             </li>           
           </MyPageList>
         </ul>        
