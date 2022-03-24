@@ -11,7 +11,7 @@ import Walletdelete from '../MyPage/Section/Walletdelete';
 function MyPage({ match }) {
   return (
     <>
-      <Route path={`${match.path}/`} element={PageList} />
+      <Route exact path={match.path} component={PageList} />
       <Route path={`${match.path}/email`} element={Email} />
       <Route path={`${match.path}/password`} element={Password} />
       <Route path={`${match.path}/sendresult`} element={Sendresult} />
