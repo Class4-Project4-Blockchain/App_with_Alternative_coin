@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter,Link } from 'react-router-dom';
 import styled from "styled-components";
 
 function Withdrawal() {
@@ -24,7 +24,7 @@ function Withdrawal() {
       </>
     );
   }
-  export default Withdrawal;
+  export default withRouter(Withdrawal);
 
   const MyPageBox = styled.div`
   border-radius: 10px;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function PageList() {
@@ -42,7 +42,7 @@ function PageList() {
   );
 }
 
-export default PageList;
+export default withRouter(PageList);
 
 const MyPageBox = styled.div`
   border-radius: 10px;

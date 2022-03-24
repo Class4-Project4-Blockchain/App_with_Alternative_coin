@@ -1,15 +1,17 @@
 import './assets/css/App.css';
-import { Routes, Route } from 'react-router-dom';
-import Reference from './components/pages/Reference.js';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Reference from './pages/Reference';
 import MyPage from '../src/components/MyPage/PageList';
 
 function App() {  
   return (
     <>
-        <Routes>
-              <Route path="/" element={<Reference/>}/>
-              <Route path="/mypage" element={<MyPage/>}/>
-        </Routes>
+      <Router>
+        <Switch>
+              <Route exact path="/" component={Reference}/>
+              <Route path="/mypage" component={MyPage}/>
+        </Switch>
+      </Router>
     </>
   );
 }

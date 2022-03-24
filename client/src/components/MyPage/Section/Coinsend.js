@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import styled from "styled-components";
 
 function Coinsend() {
@@ -24,7 +24,7 @@ function Coinsend() {
       </>
     );
   }
-  export default Coinsend;
+  export default withRouter(Coinsend);
 
   const MyPageBox = styled.div`
   border-radius: 10px;

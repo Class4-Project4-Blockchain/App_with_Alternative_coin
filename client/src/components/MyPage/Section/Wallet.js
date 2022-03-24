@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter , Link } from 'react-router-dom';
 import styled from "styled-components";
 
 function Wallet() {
@@ -24,7 +24,7 @@ function Wallet() {
       </>
     );
   }
-  export default Wallet;
+  export default withRouter(Wallet);
 
   const MyPageBox = styled.div`
   border-radius: 10px;
