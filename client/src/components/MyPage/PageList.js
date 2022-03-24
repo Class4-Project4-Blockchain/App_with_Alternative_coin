@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function PageList() {
@@ -42,7 +42,7 @@ function PageList() {
   );
 }
 
-export default withRouter(PageList);
+export default PageList;
 
 const MyPageBox = styled.div`
   border-radius: 10px;
@@ -62,7 +62,7 @@ const MyPageTitle = styled.li`
   font-size: 20px;
   padding-top: 3px;
   font-weight: 600;
-  color: #1dcc77;
+  color: #80C7F2;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   text-align: center;
@@ -74,5 +74,5 @@ const MyPageList = styled.div`
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 30px;
-  background-color: #eee;
+  background-color: #F0F1F2;
 `;
