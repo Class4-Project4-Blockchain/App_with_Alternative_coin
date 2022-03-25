@@ -1,23 +1,21 @@
 import './assets/css/App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Reference from './components/pages/Reference.js';
-import axios from 'axios';
-import MyPage from '../src/components/MyPage/PageList';
+import Main from './components/pages/Main';
+import Trade from './components/pages/Trade';
+import Mypage from './components/pages/Mypage';
+import Login from './components/pages/Login';
 
 function App() {
 
-    // useEffect(()=>{
-    //   axios.get('http://localhost:3001/mywallet/show').then((response)=>{
-    //     console.log(response.data)
-    //   })
-    // }, [])
 
   return (
     <>
         <Routes>
-              <Route path="/" element={<Reference/>}/>
-              <Route path="/mypage" element={<MyPage/>}/>
+              <Route path="/" element={<Main/>}/>
+              <Route path="/trade" element={<Trade/>}/>
+              <Route path="/mypage" element={<Mypage/>}/>
+              <Route path="/login" element={<Login/>}/>
         </Routes>
     </>
   );
