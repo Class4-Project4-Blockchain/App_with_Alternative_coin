@@ -4,12 +4,14 @@ import Main from './components/pages/Main';
 import Trade from './components/pages/Trade';
 import Mypage from './components/pages/Mypage';
 import Login from './components/pages/Login';
+import Reference from './components/pages/Reference';
 
 function App() {
   return (
     <>
         <Routes>
               <Route path="/" element={<Main/>}/>
+              <Route path="/reference" element={<Reference/>}/>
               <Route path="/trade" element={<Trade/>}/>
               <Route path="/mypage" element={<Mypage/>}/>
               <Route path="/login" element={<Login/>}/>

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Routes, Route } from 'react-router';
+import MyPage from '../MyPage/MyPage';
 import styled from "styled-components";
 import Button from '../element/Button';
 
@@ -63,6 +65,7 @@ function Mypage(){
     return(        
         <>
         <BetweenNavAndBody />
+        <MyPage />       
         </>
     );
 }
