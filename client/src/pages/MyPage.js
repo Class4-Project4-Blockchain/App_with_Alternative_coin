@@ -7,7 +7,8 @@ import Password from '../components/MyPage/Section/Password';
 import Sendresult from '../components/MyPage/Section/Sendresult';
 import Withdrawal from '../components/MyPage/Section/Withdrawal';
 import Wallet from '../components/MyPage/Section/Wallet';
-import Walletdelete from '../components/MyPage/Section/Walletdelete';
+// import Walletdelete from '../components/MyPage/Section/Walletdelete';
+import Walletdelete from '../components/MyPage/Walletdelete';
 
 
 function MyPage({ match }) {
@@ -19,7 +20,8 @@ function MyPage({ match }) {
       <Route path={`${match.path}/sendresult`} component={Sendresult} />
       <Route path={`${match.path}/wallet`} component={Wallet} />
       <Route path={`${match.path}/walletdelete`} component={Walletdelete} />
-      <Route path={`${match.path}/withdrawal`} component={Withdrawal} />       
+      {/* <Route path={`${match.path}/withdrawal`} component={Withdrawal} />        */}
+      <Route path={`mypage/withdrawal`} component={Withdrawal} />       
     </>
   );
 }
