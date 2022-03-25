@@ -26,7 +26,36 @@ function MyPage() {
               </form>  
             </li>            
           </MyPageList>
-        </ul>          
+        </ul>
+        <ul>
+          <MyPageTitle>송금</MyPageTitle>
+          <MyPageList>
+            <li>
+              보낼지갑주소
+              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px'}}>
+              <input name="payto" style={{width : '99%', borderWidth: '0', height: '25px'}}/>                  
+              </form>           
+            </li>
+            <li>
+              보내는수량 
+              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px'}}>
+              <input name="amount" style={{width : '99%', borderWidth: '0', height: '25px'}} placeholder='0.00000000'/>              
+              </form>  
+            </li>
+            <button type="submit">보내기</button>                      
+          </MyPageList>
+        </ul>
+        <ul>
+          <MyPageTitle>송금내역</MyPageTitle>
+          <MyPageList>
+            <li>
+              최근 송금내역
+              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
+                  
+              </form>           
+            </li>                     
+          </MyPageList>
+        </ul>
       </MyPageBox>      
         </>
     )
