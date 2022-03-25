@@ -1,19 +1,21 @@
-import './assets/css/App.css';
-import { Routes, Route } from 'react-router-dom';
-import Main from './components/pages/Main';
-import Trade from './components/pages/Trade';
-import Mypage from './components/pages/Mypage';
-import Login from './components/pages/Login';
+import "./assets/css/App.css";
+import { Routes, Route } from "react-router-dom";
+import Main from "./components/pages/Main";
+import Trade from "./components/pages/Trade";
+import Mypage from "./components/pages/Mypage";
+import Login from "./components/pages/Login";
+import Join from "./components/pages/Join";
 
 function App() {
   return (
     <>
-        <Routes>
-              <Route path="/" element={<Main/>}/>
-              <Route path="/trade" element={<Trade/>}/>
-              <Route path="/mypage" element={<Mypage/>}/>
-              <Route path="/login" element={<Login/>}/>
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/trade" element={<Trade />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
+      </Routes>
     </>
   );
 }

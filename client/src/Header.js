@@ -85,12 +85,25 @@ function Header() {
         <NavMenuBackBox>
           <NavMenuBackColor />
         </NavMenuBackBox>
-        <NavLink to="/"><NavLogoBox src={Bono} /></NavLink>
+        <NavLink to="/">
+          <NavLogoBox src={Bono} />
+        </NavLink>
         <NavMenuContainer>
-            <NavLink to="/explorer"><NavMenuExplorer>EXPLORER</NavMenuExplorer></NavLink>
-            <NavLink to="/trade"><NavMenuTrade>TRADE</NavMenuTrade></NavLink>
-            <NavLink to="/mypage"><NavMenuMyPage>MyPage</NavMenuMyPage></NavLink>
-            <NavLink to="/login"><NavMenuSignIn>LogIn</NavMenuSignIn></NavLink>
+          <NavLink to="/explorer">
+            <NavMenuExplorer>EXPLORER</NavMenuExplorer>
+          </NavLink>
+          <NavLink to="/trade">
+            <NavMenuTrade>TRADE</NavMenuTrade>
+          </NavLink>
+          <NavLink to="/mypage">
+            <NavMenuMyPage>MyPage</NavMenuMyPage>
+          </NavLink>
+          <NavLink to="/login">
+            <NavMenuSignIn>LogIn</NavMenuSignIn>
+          </NavLink>
+          <NavLink to="/join">
+            <NavMenuSignIn>JOIN</NavMenuSignIn>
+          </NavLink>
         </NavMenuContainer>
       </NavContainer>
     </>
