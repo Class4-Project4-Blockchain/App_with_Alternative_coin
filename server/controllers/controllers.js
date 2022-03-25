@@ -21,6 +21,13 @@ module.exports = {
         console.log(result);
       },
   },
+  wsApi: { //웹에 db 띄우기
+    getShow: async (req, res) => {
+        let result = await testModel.getSelected();
+        res.send(result);
+        console.log("db 웹에 띄우기")
+      },
+  },
 
   wdApi: { //db에 delete
     getDelete: async (req, res) => {

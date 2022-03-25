@@ -1,3 +1,4 @@
+
 const getConn = require('../util/db');
 
 exports.getRead = () => {
@@ -30,6 +31,24 @@ exports.getSelected = () => {
     });
 };
 
+// exports.getShow = () => {
+//     return new Promise((resolve, reject) => {
+//         getConn((con) => {
+//             try { // 성공
+//                 let sql = 'SELECT * FROM testex';
+//                 con.query(sql, (err, result, fields) => resolve(result));
+//                 response.send(result);
+//                 con.release();
+            
+//             } catch (err) { // 실패
+//                 console.error(err);
+//             };
+//         });
+//     });
+// };
+
+
+
 exports.getInserted = () =>{
     return new Promise((resolve, reject) => {
         getConn((con) => {
@@ -40,7 +59,7 @@ exports.getInserted = () =>{
                 con.release();
                 console.log(result);
             } catch (err) { // 실패
-                console.log(error);
+                console.error(err);
             };
         });
     });
