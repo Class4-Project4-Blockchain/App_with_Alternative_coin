@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router(); // 라우터
-const ctrl = require('../controllers/controllers'); // 컨트롤러 모듈
+const Loginctrl = require('../util/com.ecum.auth/LoginController.js'); // 컨트롤러 모듈
+const Joinctrl = require('../util/com.ecum.join/JoinController.js'); // 컨트롤러 모듈
 
-router.get('/', ctrl.uApi.getTest); 
+setTimeout(()=>{console.log("Linked Users Routes")}, 1000);
+
+router.get('/', (req, res)=>{ console.log("requested /users"); res.send("requested /users");});//ctrl.uApi.getTest); 
+router.post("/login", Loginctrl.api.LoginAuth);
+router.post("/join", Joinctrl.api.AddAccount);
 // server.js app.use의 '/users'
 
 module.exports = router;
