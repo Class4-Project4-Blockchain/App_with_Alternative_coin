@@ -3,7 +3,7 @@ require('dotenv').config({ path: __dirname + '/.env' });
 
 const dbConf = {
     host: process.env.HOST,
-    user: process.env.USER,
+    user: process.env.USERS,
     password: process.env.PASSWORD,
     database: process.env.DB,
     port: process.env.PORT,
@@ -11,14 +11,22 @@ const dbConf = {
 }
 
 const con = mysql.createPool(dbConf);
-console.log(process.env.HOST);
+console.log("Connect Info Check.. ")
+console.log("dotenv check -> __dirname :", __dirname);
+console.log("HOST", process.env.HOST);
+console.log("PORT", process.env.PORT);
+console.log("USERS", process.env.USERS);
+console.log("PASSWORD", process.env.PASSWORD);
+console.log("DATABASE", process.env.DB);
+console.log("");
 
 const getConn = function(callback) {
     con.getConnection((err, connection) => {
         if(err) {console.error(err)}
-        console.log("Connection Success");
-        
+        if(!err){
+        // console.log("\n\nConnection Success..\n\n");
         callback(connection);
+        }
     });
 };
 
