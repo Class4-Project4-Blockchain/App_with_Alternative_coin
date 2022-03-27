@@ -3,6 +3,9 @@ import { withRouter, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router';
+import MyPage from '../MyPage/MyPage';
+import Button from '../element/Button';
 
 function MyPage() {
 
@@ -56,6 +59,8 @@ function MyPage() {
           </MyPageList>
         </ul>          
       </MyPageBox>      
+        <BetweenNavAndBody />
+        <MyPage />       
         </>
     )
 }
