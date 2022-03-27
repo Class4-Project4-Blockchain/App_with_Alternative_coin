@@ -53,7 +53,7 @@ exports.getInserted = () =>{
     return new Promise((resolve, reject) => {
         getConn((con) => {
             try { // 성공
-                let sql = 'INSERT INTO testex (name, pwd) values("wonhyeon", "555")';
+                let sql = 'INSERT INTO testex (name, pwd) values("wonhyeon11", "157")';
 
                 con.query(sql, (err, result, fields) => resolve(result));
                 con.release();
