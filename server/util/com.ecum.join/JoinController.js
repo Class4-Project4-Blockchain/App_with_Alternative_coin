@@ -8,10 +8,9 @@ module.exports = {
       let id = req.body.id;
       let pwd = req.body.pw;
       let email = req.body.email;
-      console.log(req.body.id);
-      console.log(req.body.pw);
-      console.log(req.body.email);
-      res.json(addAccount.protect_string_AddAccount(id,pwd,email ));
+      console.log("c", req.body.id, req.body.pw, req.body.email);
+      let result = addAccount.public_string_AddAccount(id, pwd, email );
+      res.json({results: result})
     },
   }
 }

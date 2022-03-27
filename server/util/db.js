@@ -19,6 +19,11 @@ console.log("USERS", process.env.USERS);
 console.log("PASSWORD", process.env.PASSWORD);
 console.log("DATABASE", process.env.DB);
 console.log("");
+if(process.env.HOST == undefined 
+    || process.env.PORT == undefined 
+    || process.env.USERS == undefined 
+    || process.env.PASSWORD == undefined 
+    || process.env.DB == undefined ) {setTimeout(()=>{console.log("!!!!!!!!!! --------->>>>>>>> Check dotenv Please <<<<<<<<<<--------- !!!!!!!!!!!\n")},15000 )}
 
 const getConn = function(callback) {
     con.getConnection((err, connection) => {
