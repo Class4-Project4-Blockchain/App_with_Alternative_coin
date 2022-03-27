@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router(); // 라우터
-const Loginctrl = require('../util/com.ecum.auth/LoginController.js'); // 컨트롤러 모듈
+const Loginctrl = require('../util/com.ecum.login/LoginController.js'); // 컨트롤러 모듈
 const Joinctrl = require('../util/com.ecum.join/JoinController.js'); // 컨트롤러 모듈
 
 setTimeout(()=>{console.log("Linked Users Routes")}, 1000);

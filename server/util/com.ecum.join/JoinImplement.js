@@ -1,15 +1,21 @@
-const JoinDAO = require("./JoinDao.js");
-const bcrypt = require("bcryptjs");
-
+const { hash } = require("bcrypt");
+const AccountDao = require("../com.ecum.auth/accountDao.js");
+const usebcrpyt = require("../com.ecum.auth/usebcrypt");
 module.exports = {
-    //let api = dictionary
-    // let variable = callback(){};
-        protect_string_AddAccount: async (userid, pwd, email) => {
-        // let id = userid;
-        // let email = email;
-        let hashedPWD = await bcrypt.hash(pwd.toString(), 8);
-        // console.log(userid, email, hashedPWD );
-        return await JoinDAO.addAccount(userid, hashedPWD, email );
-            
-        },
+    public_string_AddAccount: async (userid, pwd, email) => {
+        let id_check = await AccountDao.AccountCheck.SelectID(userid);
+        console.log("I", userid, pwd, email);
+        if(id_check >0){
+            console.log("id가 존재함")
+            return "아이디가 존재합니다.";
+        }
+        else if(id_check == 0){
+            let hashedPWD = await usebcrpyt.gethash(pwd);
+            let result = await AccountDao.addAccount(userid, hashedPWD, email );
+            console.log(result);
+        }
+        else {
+            throw err;
+        }
+    },
 }
