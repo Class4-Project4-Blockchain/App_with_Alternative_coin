@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../element/Button";
 import { Link } from "react-router-dom";
+import Button from '../atoms/Button';
 
 const Wrapper = styled.section`
   margin: 2em auto;
@@ -55,10 +56,11 @@ const InputWrap = styled.div`
 `;
 
 function Inputs() {
+
   return (
     <>
       <InputWrap>
-        <form action="https://test-db.run.goorm.io/login" method="post">
+        <form action="https://api-tester.run.goorm.io/users/login" method="post">
           <label>
             아이디
             <input type="text" placeholder="아이디 입력" />
@@ -69,19 +71,19 @@ function Inputs() {
             <input type="text" placeholder="패스워드 입력" />
           </label>
           <br />
-          <Link to="/mypage">
+          {/* <Link to="/mypage"> */}
             <Button size="lg" color="type2">
               보노로그인
             </Button>
-          </Link>
+          {/* </Link> */}
           <br />
-          <Link to="/mypage">
+          {/* <Link to="/mypage"> */}
             <input
               type="image"
               className="submit"
               src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png"
             />
-          </Link>
+          {/* </Link> */}
           <br />
           <Link to="/mypage">
             <input
