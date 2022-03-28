@@ -1,5 +1,5 @@
-const getConn = require("./db");
-
+const getConn = require("./dbconn.js");
+// console.log("Linked Loign DAO")
 module.exports = {
     AccountCheck: {
         SelectID : async (userid) => {
@@ -37,4 +37,17 @@ module.exports = {
             })
         },
     },
+    addAccount:async (userid, hashpwd, email)=> {
+        return new Promise( (resolve, reject) => {
+            getConn((conn) => {
+                try {
+                    let sQuery = `INSERT INTO users (id , pwd, email) VALUES ( '${userid}', "${hashpwd}", "${email}");`;
+                    conn.query(sQuery, (err, result) => {  resolve(result); 
+                        // console.log("adduser result:", result)
+                    });
+                    conn.release();
+                } catch (err) { console.error(err); }
+            })
+        })   
+    } 
 }
