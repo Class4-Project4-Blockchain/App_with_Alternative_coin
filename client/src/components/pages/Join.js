@@ -60,7 +60,7 @@ function Inputs() {
     <>
       <InputWrap>
         <Contents>
-          <form action="/api/join" method="post">
+          <form action="https://api-tester.run.goorm.io/users/join" method="post">
             <label>
               아이디
               <input type="text" placeholder=" 아이디 입력" />

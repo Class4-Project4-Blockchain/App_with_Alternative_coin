@@ -1,4 +1,4 @@
-const getConn = require("./db.js");
+const getConn = require("./dbconn.js");
 
 exports.addAccount = {
     addAccount:async (userid, hashpwd, email)=> {
