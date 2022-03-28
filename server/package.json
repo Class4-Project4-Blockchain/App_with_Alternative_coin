@@ -21,7 +21,6 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
-    "proxy": "http://localhost:3001/mywallet",
     "nodemon": "^2.0.15"
   }
 }
