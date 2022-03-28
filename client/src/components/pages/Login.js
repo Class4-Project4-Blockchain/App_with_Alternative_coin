@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../element/Button";
 import { Link } from "react-router-dom";
+import Button from '../atoms/Button';
 
 const Wrapper = styled.section`
   margin: 2em auto;

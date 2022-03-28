@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router';
 import MyPage from '../MyPage/MyPage';
 import styled from "styled-components";
-import Button from '../element/Button';
+import Button from '../atoms/Button';
 
 const HomeTestBack = styled.div`
     width: 1500px;

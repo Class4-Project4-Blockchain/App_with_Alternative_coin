@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import Button from '../element/Button';
+import Button from '../atoms/Button';
 
 const HomeTestBack = styled.div`
     width: 1500px;
