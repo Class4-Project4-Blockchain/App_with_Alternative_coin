@@ -1,6 +1,67 @@
 const testModel = require("../models/models");
+// const blockDao = require("../models/AccountDao");
+// const addBlockDao = require("../models/addBlockDao");
+const request = require("request");
+require("dotenv").config({ path: __dirname + "/.env" });
+
+const USER = process.env.RPC_USER;
+const PASS = process.env.RPC_PASS;
+const PORT = process.env.RPC_PORT;
+const URL = process.env.RPC_URL;
+const ID = "Bonocoin";
+const headers = { "content-type": "text/plain;" };
+
 
 module.exports = {
+
+  getBlockCount: { //원현이형꺼 인포가져오기
+    getblockcount: (req, res) => {
+      let dataString = `{"jsonrpc":"1.0","id":"${ID}","method":"getwalletinfo","params":[]}`;
+      let options = {
+        url: `http://${USER}:${PASS}@${URL}:${PORT}/`,
+        method: "POST",
+        headers: headers,
+        body: dataString,
+      };
+
+      callback = (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+          const data = JSON.parse(body);
+          // res.render("getblockcount", {
+          //   getblockcount: data.result,
+          // });
+          res.send(data);
+          console.log(data);
+        } else {
+          console.error("getblockcount's Error => ", error);
+        }
+      };
+
+      request(options, callback);
+    },
+  },
+
+  getNewAddress:{
+  getnewaddress: (req, res) => {
+    var account = req.body.account;
+    var dataString = `{"jsonrpc":"1.0","id":"${ID_STRING}","method":"getnewaddress","params":["${account}"]}`;
+    var options = {
+        url: `http://${USER}:${PASS}@${URL}:${PORT}/`,
+        method: "POST",
+        headers: headers,
+        body: dataString
+    };
+
+  callback = (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      const data = JSON.parse(body);
+      res.send(data);
+    }
+  };
+  request(options, callback);
+},
+},
+
   eApi: {
     getTest: async (req, res) => {
       let result = await testModel.getRead();

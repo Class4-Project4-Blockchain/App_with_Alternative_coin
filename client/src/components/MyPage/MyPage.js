@@ -1,8 +1,41 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+// const ctrl = require('/workspace/App_with_Alternative_coin/server/controllers/controllers');
+
+// require("dotenv").config({ path: __dirname + "/.env" });
+
+
 
 function MyPage() {
+
+  const [Dbdata, SetDbdata] = useState([]);
+  const [Avalue, SetValue] = useState("");
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(()=>{ //마이페이지에 들어왔을 때 콘솔에 walletinfo 띄움.
+    axios.get('http://localhost:3001/mywallet/getblockcount').then(({data})=>{
+        SetDbdata((data));
+      console.log(data);
+    })
+  }, []);
+
+const handlechange = ({ target: { value }}) => SetValue(value);
+
+const handleSubmit = async (event) => {
+  setDisabled(true);
+  event.preventDefault();
+  await new Promise((r) => setTimeout(r, 1000));
+  alert(`변경된 패스워드: ${Avalue}`);
+  setDisabled(false);
+  console.log(Avalue)
+};
+
+  // console.log(Dbdata.result.hdmasterkeyid)
+
     return (
         <>
              <MyPageBox>
@@ -12,8 +45,13 @@ function MyPage() {
             <li>
               아이디 
               <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
-                  
-              </form>           
+              </form>       
+              
+              <form onSubmit={handleSubmit}>
+              지갑생성  
+              <input type='text' name="account" value={Avalue} onChange={handlechange}></input>
+              <button type="submit" disabled={disabled}>만들기</button>  
+              </form>
             </li>
             <li>
               이메일 
@@ -22,8 +60,8 @@ function MyPage() {
             </li>
             <li>
               지갑주소 
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
-              </form>  
+              <input style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
+              </input>  
             </li>            
           </MyPageList>
         </ul>

@@ -9,13 +9,11 @@ router.get('/test', (req,res) => {
 })
 
 router.get('/show', ctrl.wsApi.getShow); //웹에 디비 띄우기 
+router.get('/getblockcount', ctrl.getBlockCount.getblockcount); //컨트롤러env 유저의 정보
+router.post('/getnewaddress', ctrl.getNewAddress.getnewaddress); // getnewaddress
+
 
 router.get('/insert', ctrl.wiApi.getInsert);
 router.get('/delete', ctrl.wdApi.getDelete);
-
-
-
-
-
 
 module.exports = router;

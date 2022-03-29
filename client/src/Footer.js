@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from "styled-components";
-import Button from '../src/components/element/Button';
+// import Button from '../a';
 import axios from 'axios';
 
 const FooterContainer = styled.div`

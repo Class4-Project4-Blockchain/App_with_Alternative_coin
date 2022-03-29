@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "../element/Button";
+import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
 
 const Wrapper = styled.section`

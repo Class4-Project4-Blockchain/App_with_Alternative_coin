@@ -10,43 +10,42 @@ import Join from "./components/pages/Join";
 import axios from 'axios';
 
 function App() {
-  const [Dbdata, SetDbdata] = useState([]);
+  // const [Dbdata, SetDbdata] = useState([]);
 
-  useEffect(()=>{
-      axios.get('http://localhost:3001/mywallet/show').then(({data})=>{
-          SetDbdata((data));
-        console.log(data[0].no);
-      }).then(
+  // useEffect(()=>{
+  //     axios.get('http://localhost:3001/mywallet/show').then(({data})=>{
+  //         SetDbdata((data));
+  //       console.log(data);
+  //     }).then(
         
-      )
-    }, []);
+  //     )
+  //   }, []);
 
-  window.localStorage.setItem('logindata', JSON.stringify(Dbdata));
+  // window.localStorage.setItem('logindata', JSON.stringify(Dbdata));
     
-  var data = window.localStorage.getItem('logindata');
-    // console.log(data); //string
+  // var data = window.localStorage.getItem('logindata');
+  //   // console.log(data); //string
 
-  if(data !== null){
-    // var parsedata = JSON.parse(d1)
-    var parsedata1 = JSON.parse(data); //객체
-    // console.log(parsedata);
-    console.log(parsedata1[0]);
-    console.log(parsedata1[1]);
+  // if(data !== null){
+  //   // var parsedata = JSON.parse(d1)
+  //   var parsedata1 = JSON.parse(data); //객체
+  //   // console.log(parsedata);
+  //   console.log(parsedata1[0]);
+  //   console.log(parsedata1[1]);
 
-    window.localStorage.setItem('logindataparsed', parsedata1[0]);
+  //   window.localStorage.setItem('logindataparsed', parsedata1[0]);
     
-    console.log(parsedata1[0]);
-    var dataparsedno = window.localStorage.getItem('logindataparsed');
-        // window.localStorage.setItem('logindataparsed', parsedata1[1].no);
-    console.log((dataparsedno));
+  //   console.log(parsedata1[0]);
+  //   var dataparsedno = window.localStorage.getItem('logindataparsed');
+  //       // window.localStorage.setItem('logindataparsed', parsedata1[1].no);
+  //   console.log((dataparsedno));
 
-      
-      // if(parsedata1 !== null){
-      //   var parsedata2 = JSON.parse(parsedata1.name)
-      //   console.log(parsedata2);
-      // }
+  //     // if(parsedata1 !== null){
+  //     //   var parsedata2 = JSON.parse(parsedata1.name)
+  //     //   console.log(parsedata2);
+  //     // }
 
-  }
+  // }
     // var e1 = window.localStorage.getItem('e');
 
     // var parsed1 = JSON.parse(d1);
