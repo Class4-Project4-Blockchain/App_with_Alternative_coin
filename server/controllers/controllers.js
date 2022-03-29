@@ -44,7 +44,8 @@ module.exports = {
   getNewAddress:{
   getnewaddress: (req, res) => {
     var account = req.body.account;
-    var dataString = `{"jsonrpc":"1.0","id":"${ID_STRING}","method":"getnewaddress","params":["${account}"]}`;
+    console.log(account);
+    var dataString = `{"jsonrpc":"1.0","id":"${ID}","method":"getnewaddress","params":["${account}"]}`;
     var options = {
         url: `http://${USER}:${PASS}@${URL}:${PORT}/`,
         method: "POST",
@@ -59,8 +60,34 @@ module.exports = {
     }
   };
   request(options, callback);
+  console.log('wallet만들었어')
 },
 },
+
+getAddressesbyAccount:{
+  getaddressesbyaccount: (req, res) =>{
+    var account = req.body.account;
+    console.log(account)
+    // res.send(`Account : ${account}`);
+    var dataString = `{"jsonrpc":"1.0","id":"${ID}","method":"getaddressesbyaccount","params":["${account}"]}`;
+  var options = {
+    url: `http://${USER}:${PASS}@${URL}:${PORT}/`,
+    method: "POST",
+    headers: headers,
+    body: dataString
+  };
+
+  callback = (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      const data = JSON.parse(body);
+      res.send(data);
+      console.log(data);
+    }
+  };
+  request(options, callback);
+  console.log('wallet찾기완료')
+  }
+  },
 
   eApi: {
     getTest: async (req, res) => {

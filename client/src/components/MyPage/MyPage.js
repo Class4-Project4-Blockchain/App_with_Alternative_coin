@@ -8,10 +8,9 @@ import axios from 'axios';
 
 // require("dotenv").config({ path: __dirname + "/.env" });
 
-
-
 function MyPage() {
 
+  const [Result, SetResult] = useState('');
   const [Dbdata, SetDbdata] = useState([]);
   const [Avalue, SetValue] = useState("");
   const [disabled, setDisabled] = useState(false);
@@ -23,18 +22,48 @@ function MyPage() {
     })
   }, []);
 
+  // ↓↓↓↓↓↓↓↓↓↓↓ 지갑생성
+
 const handlechange = ({ target: { value }}) => SetValue(value);
 
-const handleSubmit = async (event) => {
+const IDSubmit = async (event) => {
   setDisabled(true);
   event.preventDefault();
   await new Promise((r) => setTimeout(r, 1000));
-  alert(`변경된 패스워드: ${Avalue}`);
-  setDisabled(false);
+  alert(`지갑생성완료: ${Avalue}`);
+
+axios.post('http://localhost:3001/mywallet/getnewaddress',{
+  account: Avalue
+}).then(()=>{
+  console.log('post완료')
   console.log(Avalue)
+});  
+  setDisabled(false);
+  
+};
+//↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑지갑생성
+
+// ↓↓↓↓↓↓↓↓↓↓↓ 지갑찾기
+const FindWalletSubmit = async (event) => {
+  setDisabled(true);
+  event.preventDefault();
+  await new Promise((r) => setTimeout(r, 1000));
+  alert(`찾을 지갑의 계정: ${Avalue}`);
+
+axios.post('http://localhost:3001/mywallet/getaddressesbyaccount/taesu1',{
+  account: Avalue
+}).then((result)=>{
+  console.log(result.data.result[0])
+  SetResult(result.data.result[0]); //변경값을 이렇게 설정한 이유는 인풋에서 설정하려고하면 속성을 못읽어서 새로고침하면 값이 날아가버려오류생김.
+  
+});
+  setDisabled(false);
+  
 };
 
-  // console.log(Dbdata.result.hdmasterkeyid)
+// console.log(Result);
+
+// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑지갑찾기
 
     return (
         <>
@@ -47,10 +76,10 @@ const handleSubmit = async (event) => {
               <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
               </form>       
               
-              <form onSubmit={handleSubmit}>
-              지갑생성  
-              <input type='text' name="account" value={Avalue} onChange={handlechange}></input>
-              <button type="submit" disabled={disabled}>만들기</button>  
+              <form onSubmit={IDSubmit}>
+                
+              <input type='text' placeholder='원하는 id입력' name="account" value={Avalue} onChange={handlechange}></input>
+              <button type="submit" disabled={disabled}>지갑생성</button>  
               </form>
             </li>
             <li>
@@ -59,9 +88,12 @@ const handleSubmit = async (event) => {
               </form>  
             </li>
             <li>
-              지갑주소 
-              <input style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
+            <form onSubmit={FindWalletSubmit}>
+              <input placeholder='원하는 id입력' name="account" value={Avalue} onChange={handlechange} style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
               </input>  
+              <button type="submit" disabled={disabled}>지갑주소찾기</button>
+              <input type='text' placeholder='찾는 지갑주소' value={Result} onChange={handlechange}></input> 
+              </form>
             </li>            
           </MyPageList>
         </ul>
