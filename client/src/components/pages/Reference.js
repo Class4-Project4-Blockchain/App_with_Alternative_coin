@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import Button from '../element/Button';
+import Button from '../atoms/Button';
 
 const HomeTestBack = styled.div`
     width: 1500px;
@@ -64,7 +64,9 @@ function Reference(){
         <>
         <BetweenNavAndBody />
             <HomeTestBack>
-                <BonoColorExam_1 />
+                <BonoColorExam_1>
+                    <h3>칼라볼라고 임시로 메인에 갖다놓음</h3>
+                </ BonoColorExam_1>
                 <BetweenVertical />
                 <BonoColorExam_2 />
                 <BetweenVertical />
