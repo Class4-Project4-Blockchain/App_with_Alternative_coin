@@ -52,24 +52,6 @@ const TradeList = () => {
                 // console.log("res.data[0].signed_change_price = " , res.data[0].signed_change_price);
         });
     },[]);
-
-        //     let id = setInterval(() => {
-        //         setCount(count + 1);
-        //       }, 3000);
-        //       return () => clearInterval(id);
-        // })
-
-        // let [count, setCount] = useState(0);
-
-//   useEffect(() => {
-    // let id = setInterval(() => {
-    //   setCount(count + 1);
-    // }, 3000);
-    // return () => clearInterval(id);
-//   });
-  
-    
-
     
     return (
         <>
