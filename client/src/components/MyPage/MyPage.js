@@ -121,8 +121,8 @@ axios.post('http://localhost:3001/mywallet/getaddressesbyaccount/taesu1',{
               <MyPageList>
                 <li>
                   최근 송금내역
-                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
-                  
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px',borderRadius: '10px'}}>
+                  <input style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>
                   </form> 
                 </li>                     
               </MyPageList>
