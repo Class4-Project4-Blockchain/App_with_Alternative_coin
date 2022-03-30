@@ -39,3 +39,6 @@ goorm.manifest
 
 # environment variable
 .env
+
+# yarn
+yarn.lock
