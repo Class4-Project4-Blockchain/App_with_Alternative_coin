@@ -1,4 +1,4 @@
-const getConn = require("./dbconn.js");
+const getConn = require("../util/db");
 // console.log("Linked Loign DAO")
 module.exports = {
     AccountCheck: {
