@@ -76,14 +76,16 @@ axios.post('http://localhost:3001/mywallet/getaddressesbyaccount/taesu1',{
             <ul>
               <MyPageTitle>마이페이지</MyPageTitle>
               <MyPageList>
-                <li>
-                  아이디 
+                아이디
+                <li>                
                   <input value={Dbdata.no || ''} onChange={handlechange} style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
                   </input>       
-                  </li>
-                  이메일 
+                </li>
+                이메일
+                <li> 
                   <input value={Dbdata.email || ''} onChange={handlechange} style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
-                  </input>  
+                  </input> 
+                </li> 
                 <li>
                   <form onSubmit={IDSubmit}>
                     
