@@ -82,7 +82,7 @@ const TradeList = () => {
                                         {coin.changeRate}
                                     </CoinChangeRate>
                                     <CoinChangePrice style={0 < coin.changePrice ? {color : 'red'} : {color : 'blue'}}>
-                                        {coin.changePrice}
+                                        {coin.changePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                     </CoinChangePrice>
                                 </CoinChange>
                                 <CoinTextPrice>
