@@ -16,11 +16,16 @@ function MyPage() {
   const [disabled, setDisabled] = useState(false);
 
   useEffect(()=>{ //마이페이지에 들어왔을 때 콘솔에 walletinfo 띄움.
-    axios.get('http://localhost:3001/mywallet/getblockcount').then(({data})=>{
-        SetDbdata((data));
-      console.log(data);
+    axios.get('http://localhost:3001/mywallet/show').then(({data})=>{
+        SetDbdata((data[0]));
+      // console.log(data[0]);
     })
   }, []);
+
+console.log(Dbdata);
+
+    // window.localStorage.setItem('logindata', JSON.stringify(Dbdata));
+  // console.log('Dbdata:' + Dbdata);
 
   // ↓↓↓↓↓↓↓↓↓↓↓ 지갑생성
 
@@ -64,22 +69,24 @@ axios.post('http://localhost:3001/mywallet/getaddressesbyaccount/taesu1',{
 // console.log(Result);
 
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑지갑찾기
-
+// console.log(Dbdata);
     return (
       <>
           <MyPageBox>
             <ul>
               <MyPageTitle>마이페이지</MyPageTitle>
               <MyPageList>
-                <li>
-                  아이디 
-                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px', borderRadius: '10px'}}>
-                  </form>       
-                  <li>
-                  이메일 
-                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px', borderRadius: '10px'}}>
-                  </form>  
+                아이디
+                <li>                
+                  <input value={Dbdata.no || ''} onChange={handlechange} style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
+                  </input>       
                 </li>
+                이메일
+                <li> 
+                  <input value={Dbdata.email || ''} onChange={handlechange} style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
+                  </input> 
+                </li> 
+                <li>
                   <form onSubmit={IDSubmit}>
                     
                   <input style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}} type='text' placeholder='원하는 id입력' name="account" value={Avalue} onChange={handlechange}></input>
