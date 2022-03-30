@@ -1,6 +1,7 @@
 const AccountDao = require("../models/AccountDao.js");
 const usebcrpyt = require("../util/com.ecum.auth/usebcrypt");
 module.exports = {
+    
     public_string_AddAccount: async (userid, pwd, email) => {
         let id_check = await AccountDao.AccountCheck.SelectID(userid);
         console.log("I", userid, pwd, email);

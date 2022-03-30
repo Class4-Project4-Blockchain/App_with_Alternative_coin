@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+<<<<<<< HEAD
 // import Button from "../element/Button";
+=======
+>>>>>>> c06a0288f9fef4af5bf98ec33c6c726ae084e4a6
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
 

@@ -33,6 +33,7 @@ const getConn = function(callback) {
         callback(connection);
         }
     });
+    
 };
 
 getConn;

@@ -1,67 +1,153 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+// const ctrl = require('/workspace/App_with_Alternative_coin/server/controllers/controllers');
+
+// require("dotenv").config({ path: __dirname + "/.env" });
 
 function MyPage() {
+
+  const [Result, SetResult] = useState('');
+  const [Dbdata, SetDbdata] = useState([]);
+  const [Avalue, SetValue] = useState("");
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(()=>{ //마이페이지에 들어왔을 때 콘솔에 walletinfo 띄움.
+    axios.get('http://localhost:3001/mywallet/getblockcount').then(({data})=>{
+        SetDbdata((data));
+      console.log(data);
+    })
+  }, []);
+
+  // ↓↓↓↓↓↓↓↓↓↓↓ 지갑생성
+
+const handlechange = ({ target: { value }}) => SetValue(value);
+
+const IDSubmit = async (event) => {
+  setDisabled(true);
+  event.preventDefault();
+  await new Promise((r) => setTimeout(r, 1000));
+  alert(`지갑생성완료: ${Avalue}`);
+
+axios.post('http://localhost:3001/mywallet/getnewaddress',{
+  account: Avalue
+}).then(()=>{
+  console.log('post완료')
+  console.log(Avalue)
+});  
+  setDisabled(false);
+  
+};
+//↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑지갑생성
+
+// ↓↓↓↓↓↓↓↓↓↓↓ 지갑찾기
+const FindWalletSubmit = async (event) => {
+  setDisabled(true);
+  event.preventDefault();
+  await new Promise((r) => setTimeout(r, 1000));
+  alert(`찾을 지갑의 계정: ${Avalue}`);
+
+axios.post('http://localhost:3001/mywallet/getaddressesbyaccount/taesu1',{
+  account: Avalue
+}).then((result)=>{
+  console.log(result.data.result[0])
+  SetResult(result.data.result[0]); //변경값을 이렇게 설정한 이유는 인풋에서 설정하려고하면 속성을 못읽어서 새로고침하면 값이 날아가버려오류생김.
+  
+});
+  setDisabled(false);
+  
+};
+
+// console.log(Result);
+
+// ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑지갑찾기
+
     return (
-        <>
-             <MyPageBox>
-        <ul>
-          <MyPageTitle>마이페이지</MyPageTitle>
-          <MyPageList>
-            <li>
-              아이디 
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
+      <>
+          <MyPageBox>
+            <ul>
+              <MyPageTitle>마이페이지</MyPageTitle>
+              <MyPageList>
+                <li>
+                  아이디 
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px', borderRadius: '10px'}}>
+                  </form>       
+                  <li>
+                  이메일 
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px', borderRadius: '10px'}}>
+                  </form>  
+                </li>
+                  <form onSubmit={IDSubmit}>
+                    
+                  <input style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}} type='text' placeholder='원하는 id입력' name="account" value={Avalue} onChange={handlechange}></input>
+                  <button type="submit" disabled={disabled} style={{marginLeft : '10px', width : '170px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '10px', borderRadius: '10px'}} >지갑생성</button>  
+                  </form>
+                </li>
+              
+                <li>
+                <form onSubmit={FindWalletSubmit} >
+                  <input placeholder='원하는 id입력' name="account" value={Avalue} onChange={handlechange} style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
+                  </input>  
+                  <button type="submit" disabled={disabled} style={{marginLeft : '10px', width : '170px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '10px', borderRadius: '10px'}} >지갑주소찾기</button>
                   
-              </form>           
-            </li>
-            <li>
-              이메일 
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
-              </form>  
-            </li>
-            <li>
-              지갑주소 
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
-              </form>  
-            </li>            
-          </MyPageList>
-        </ul>
-        <ul>
-          <MyPageTitle>송금</MyPageTitle>
-          <MyPageList>
-            <li>
-              보낼지갑주소
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px'}}>
-              <input name="payto" style={{width : '99%', borderWidth: '0', height: '25px'}}/>                  
-              </form>           
-            </li>
-            <li>
-              보내는수량 
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px'}}>
-              <input name="amount" style={{width : '99%', borderWidth: '0', height: '25px'}} placeholder='0.00000000'/>              
-              </form>  
-            </li>
-            <button type="submit">보내기</button>                      
-          </MyPageList>
-        </ul>
-        <ul>
-          <MyPageTitle>송금내역</MyPageTitle>
-          <MyPageList>
-            <li>
-              최근 송금내역
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
-                  
-              </form>           
-            </li>                     
-          </MyPageList>
-        </ul>
-      </MyPageBox>      
-        </>
+                  </form>
+                  <input type='text' placeholder='찾는 지갑주소' value={Result} onChange={handlechange} style={{width: '537px', marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}></input> 
+                </li>            
+              </MyPageList>
+            </ul>
+            <ul>
+              <MyPageTitle>송금</MyPageTitle>
+              <MyPageList>
+                <li>
+                  보낼지갑주소
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px', borderRadius: '10px'}}>
+                  <input name="payto" style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>                  
+                  </form>           
+                </li>
+                <li>
+                  보내는수량 
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px', borderRadius: '10px'}}>
+                  <input name="amount" style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}} placeholder='0.00000000'/>              
+                  </form>  
+                </li>
+                <button style={{width : '561px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '10px', borderRadius: '10px'}} type="submit">보내기</button>                      
+              </MyPageList>
+            </ul>
+            <ul>
+              <MyPageTitle>송금내역</MyPageTitle>
+              <MyPageList>
+                <li>
+                  최근 송금내역
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px',borderRadius: '10px'}}>
+                  <input style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>
+                  </form> 
+                </li>                     
+              </MyPageList>
+            </ul>
+          </MyPageBox>      
+      </>
     )
 }
 
 export default MyPage;
+
+
+const StyleForm = styled.form`
+width : '99%';
+border-width: '0';
+height: '25px';
+border-radius: '6px';
+`;
+
+const InputStyle = styled.input`
+width : '99%';
+border-width: '0';
+height: '25px';
+border-radius: '6px';
+`;
 
 const MyPageBox = styled.div`
   border-radius: 10px;

@@ -10,6 +10,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
+app.get('/', (req,res) => {
+    res.send({ test : "this is test!!"});
+})
+
 app.use('/users', users);
 app.use('/exchange', exchange);
 app.use('/mywallet', mywallet);
@@ -20,3 +24,6 @@ const host = process.env.APPHOST || 'localhost';
 const port = process.env.APPPORT || 3001;
 
 app.listen(port, () => console.log(`Node.js server is running at http://${host}:${port}/`));
+
+// git test 조민경 goorm
+// git test 태수
