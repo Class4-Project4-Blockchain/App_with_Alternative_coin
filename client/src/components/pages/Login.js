@@ -58,6 +58,11 @@ const InputWrap = styled.div`
 
 function Inputs() {
 
+  let url =  "http://localhost:3001";//"https://api-tester.run.goorm.io" 
+  const headers = {
+    'Content-Type': 'text/plain',
+    "Access-Control-Allow-Origin" : "*"
+  };
   const [Inputs, setInputs] = useState({
     id:"", pw:""
   });
@@ -70,29 +75,17 @@ function Inputs() {
       [name]:value
     })
   }
-  const onChangeId = (e)=>{
-    console.log(e.target.value);
-  }
 
-  const onSubmit = async (e)=>{
+  const onSubmit =  (e)=>{
     e.preventDefault(); // submit 이벤트 발생시 refresh 방지
     console.log({Inputs})
 
-    let url = /*"https://api-tester.run.goorm.io" ||*/ "http://localhost:3001";
-    const headers = {
-      'Content-Type': 'text/plain',
-      "Access-Control-Allow-Origin" : "*"
-    };
-    await axios.post(url+"/users/login",Inputs, {headers})
+  axios.post(url+"/users/login", {id:Inputs.id, pw:Inputs.pw}, {headers})
     .then(res => {
       console.log(res);
     })
     .catch(err => {
-        if(!err.response){console.log("!err.response", err)        }
-        else{
           console.log(err)
-          alert(err)
-        }
     })
     setInputs({
       userid : id,
