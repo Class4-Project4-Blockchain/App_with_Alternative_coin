@@ -9,7 +9,7 @@ const mywallet = require('./routes/mywallet');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const corsOptions = {
-    origin: 'http://localhost:3001',
+    origin:  'http://localhost:3000',//"https://react-tester.run.goorm.io/",
     credentials: true, 
   };
   
@@ -28,8 +28,8 @@ app.use('/mywallet',cors(),  mywallet);
 
 app.get("/", (req, res)=>{res.send("Backend Connected")})
 
-const host = process.env.APPHOST || 'localhost';
-const port = process.env.APPPORT || 3001;
+const host = 'localhost';
+const port = 3001;
 
 app.listen(port, () => console.log(`Node.js server is running at http://${host}:${port}/`));
 
