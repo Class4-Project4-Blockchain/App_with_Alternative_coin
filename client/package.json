@@ -15,10 +15,6 @@
     "react-router-dom": "^6.2.2",
     "react-scripts": "^5.0.0",
     "redux": "^4.1.2",
-<<<<<<< HEAD
-=======
-    "request": "^2.88.2",
->>>>>>> c06a0288f9fef4af5bf98ec33c6c726ae084e4a6
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },

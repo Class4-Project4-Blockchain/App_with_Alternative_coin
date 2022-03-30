@@ -7,11 +7,7 @@ import Mypage from './components/pages/Mypage';
 import Login from './components/pages/Login';
 import "./assets/css/App.css";
 import Join from "./components/pages/Join";
-<<<<<<< HEAD
 import Reference from "./components/pages/Reference";
-=======
-import axios from 'axios';
->>>>>>> c06a0288f9fef4af5bf98ec33c6c726ae084e4a6
 
 function App() {
   // const [Dbdata, SetDbdata] = useState([]);
