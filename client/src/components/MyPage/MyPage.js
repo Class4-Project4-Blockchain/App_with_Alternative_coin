@@ -66,72 +66,88 @@ axios.post('http://localhost:3001/mywallet/getaddressesbyaccount/taesu1',{
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑지갑찾기
 
     return (
-        <>
-             <MyPageBox>
-        <ul>
-          <MyPageTitle>마이페이지</MyPageTitle>
-          <MyPageList>
-            <li>
-              아이디 
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
-              </form>       
+      <>
+          <MyPageBox>
+            <ul>
+              <MyPageTitle>마이페이지</MyPageTitle>
+              <MyPageList>
+                <li>
+                  아이디 
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px', borderRadius: '10px'}}>
+                  </form>       
+                  <li>
+                  이메일 
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px', borderRadius: '10px'}}>
+                  </form>  
+                </li>
+                  <form onSubmit={IDSubmit}>
+                    
+                  <input style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}} type='text' placeholder='원하는 id입력' name="account" value={Avalue} onChange={handlechange}></input>
+                  <button type="submit" disabled={disabled} style={{marginLeft : '10px', width : '170px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '10px', borderRadius: '10px'}} >지갑생성</button>  
+                  </form>
+                </li>
               
-              <form onSubmit={IDSubmit}>
-                
-              <input type='text' placeholder='원하는 id입력' name="account" value={Avalue} onChange={handlechange}></input>
-              <button type="submit" disabled={disabled}>지갑생성</button>  
-              </form>
-            </li>
-            <li>
-              이메일 
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
-              </form>  
-            </li>
-            <li>
-            <form onSubmit={FindWalletSubmit}>
-              <input placeholder='원하는 id입력' name="account" value={Avalue} onChange={handlechange} style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
-              </input>  
-              <button type="submit" disabled={disabled}>지갑주소찾기</button>
-              <input type='text' placeholder='찾는 지갑주소' value={Result} onChange={handlechange}></input> 
-              </form>
-            </li>            
-          </MyPageList>
-        </ul>
-        <ul>
-          <MyPageTitle>송금</MyPageTitle>
-          <MyPageList>
-            <li>
-              보낼지갑주소
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px'}}>
-              <input name="payto" style={{width : '99%', borderWidth: '0', height: '25px'}}/>                  
-              </form>           
-            </li>
-            <li>
-              보내는수량 
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px'}}>
-              <input name="amount" style={{width : '99%', borderWidth: '0', height: '25px'}} placeholder='0.00000000'/>              
-              </form>  
-            </li>
-            <button type="submit">보내기</button>                      
-          </MyPageList>
-        </ul>
-        <ul>
-          <MyPageTitle>송금내역</MyPageTitle>
-          <MyPageList>
-            <li>
-              최근 송금내역
-              <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px'}}>
+                <li>
+                <form onSubmit={FindWalletSubmit} >
+                  <input placeholder='원하는 id입력' name="account" value={Avalue} onChange={handlechange} style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
+                  </input>  
+                  <button type="submit" disabled={disabled} style={{marginLeft : '10px', width : '170px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '10px', borderRadius: '10px'}} >지갑주소찾기</button>
                   
-              </form>           
-            </li>                     
-          </MyPageList>
-        </ul>
-      </MyPageBox>      
-        </>
+                  </form>
+                  <input type='text' placeholder='찾는 지갑주소' value={Result} onChange={handlechange} style={{width: '537px', marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}></input> 
+                </li>            
+              </MyPageList>
+            </ul>
+            <ul>
+              <MyPageTitle>송금</MyPageTitle>
+              <MyPageList>
+                <li>
+                  보낼지갑주소
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px', borderRadius: '10px'}}>
+                  <input name="payto" style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>                  
+                  </form>           
+                </li>
+                <li>
+                  보내는수량 
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px', borderRadius: '10px'}}>
+                  <input name="amount" style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}} placeholder='0.00000000'/>              
+                  </form>  
+                </li>
+                <button style={{width : '561px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '10px', borderRadius: '10px'}} type="submit">보내기</button>                      
+              </MyPageList>
+            </ul>
+            <ul>
+              <MyPageTitle>송금내역</MyPageTitle>
+              <MyPageList>
+                <li>
+                  최근 송금내역
+                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px',borderRadius: '10px'}}>
+                  <input style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>
+                  </form> 
+                </li>                     
+              </MyPageList>
+            </ul>
+          </MyPageBox>      
+      </>
     )
 }
 
 export default MyPage;
+
+
+const StyleForm = styled.form`
+width : '99%';
+border-width: '0';
+height: '25px';
+border-radius: '6px';
+`;
+
+const InputStyle = styled.input`
+width : '99%';
+border-width: '0';
+height: '25px';
+border-radius: '6px';
+`;
 
 const MyPageBox = styled.div`
   border-radius: 10px;
