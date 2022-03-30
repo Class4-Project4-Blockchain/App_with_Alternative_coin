@@ -1,11 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
 import Button from '../atoms/Button';
+import TradeChart from "../atoms/TradeChart";
+import TradeList from "../atoms/TradeList";
+import TestProps from "../atoms/TestProps";
 
-const HomeTestBack = styled.div`
+
+const HomeBackGround = styled.div`
     width: 1500px;
-    height: 400px;
+    /* height: 1000px; */
     margin: auto;
+    background-color: pink;
 `;
 
 const BetweenNavAndBody = styled.div`
@@ -63,6 +68,10 @@ function Trade(){
     return(        
         <>
         <BetweenNavAndBody />
+        <HomeBackGround>
+            {/* <TradeChart /> */}
+            <TradeList />
+        </HomeBackGround>
         </>
     );
 }
