@@ -1,4 +1,4 @@
-const getConn = require("../util/db");
+const getConn = require("./dbconn.js");
 
 module.exports = {
     AccountCheck: {
