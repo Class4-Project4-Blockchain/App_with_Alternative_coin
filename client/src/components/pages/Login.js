@@ -71,7 +71,7 @@ function Inputs() {
   const onSubmit = (e)=>{
     e.preventDefault();
     console.log("Inputs :", id, pw);
-    axios.post("http://localhost:3003/users/login", data)  
+    axios.post("http://localhost:3001/users/login", data)  
     .then(res =>{
       console.log(res);
       const {result} = res.data;
@@ -103,7 +103,7 @@ function Inputs() {
           <br />
           <label>
             패스워드
-            <input type="text" 
+            <input type="password" 
               name="pw"
               value={pw || ""}
               onChange={onChangeHandle2}
