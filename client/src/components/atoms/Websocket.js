@@ -1,90 +1,117 @@
-import { call, put, select, flush, delay } from "redux-saga/effects";
-import { buffers, eventChannel } from "redux-saga";
+// 원래 파일명 Websocket.js
 
-// 소켓 만들기
-const createSocket = () => {
-  const client = new WebSocket("wss://api.upbit.com/websocket/v1");
-  client.binaryType = "arraybuffer";
+import { useState, useEffect } from 'react';
 
-  return client;
-};
+function Websocket(){
 
-// 소켓 연결용
-const connectSocekt = (socket, connectType, action, buffer) => {
-  return eventChannel((emit) => {
-    socket.onopen = () => {
-      socket.send(
-        JSON.stringify([
-          { ticket: "downbit-clone" },
-          { type: connectType, codes: action.payload },
-        ])
-      );
+    const [coinData, setCoinData] = useState();
+    // let arrCoinDataToJSON = [];
+
+    let coinDataToJSON = 0;
+
+    const socket = new WebSocket("wss://api.upbit.com/websocket/v1");
+
+    socket.onopen = function(e) {
+        socket.binaryType = 'arraybuffer';
+        console.log("연결 시작");
+        socket.send(JSON.stringify([
+            {"ticket":"June"},
+            {"type":"ticker","codes":["KRW-BTC"]},
+            {"type":"ticker","codes":["KRW-ETH"]},
+            {"type":"ticker","codes":["KRW-BCH"]},
+            {"type":"ticker","codes":["KRW-LTC"]},
+            {"type":"ticker","codes":["KRW-ETC"]},
+            {"type":"ticker","codes":["KRW-EOS"]},
+            {"type":"ticker","codes":["KRW-XRP"]},
+            {"type":"ticker","codes":["KRW-DOGE"]},
+            {"type":"ticker","codes":["KRW-BTG"]},
+        ]));
+      };
+      
+    socket.onmessage = function(event) {
+            // console.log(event.data);
+
+            let utf8 = new TextDecoder("utf-8");
+            let unit8 = new Uint8Array(event.data);
+            // arrCoinDataToJSON.push(JSON.parse(utf8.decode(unit8)));
+            coinDataToJSON = JSON.parse(utf8.decode(unit8));
+
+
+            console.log("arrCoinDataToJSON = " , arrCoinDataToJSON);
+
+            
+
+            // setCoinData(coinDataToJSON.trade_price);
+
+            // if(coinData !== coinDataToJSON.trade_price)
+            // {
+            //     console.log("coinData = " , coinDataToJSON);
+            // }
+            // else
+            // {
+            //     console.log("pass");
+            // }
+            
+
+            // console.log("coinData = " , coinDataToJSON);
+            // console.log("coinData = " , JSON.parse(coinData).trade_price);
+            // console.log("coinData = " , coinData.code);
+            // console.log(enc.decode(arr).trade_price);
+        
     };
 
-    socket.onmessage = (evt) => {
-      const enc = new TextDecoder("utf-8");
-      const arr = new Uint8Array(evt.data);
-      const data = JSON.parse(enc.decode(arr));
-
-      emit(data);
-    };
-
-    socket.onerror = (evt) => {
-      emit(evt);
-    };
-
-    const unsubscribe = () => {
-      socket.close();
-    };
-
-    return unsubscribe;
-  }, buffer || buffers.none());
-};
-
-// 웹소켓 연결용 사가
-const createConnectSocketSaga = (type, connectType, dataMaker) => {
-  const SUCCESS = `${type}_SUCCESS`;
-  const ERROR = `${type}_ERROR`;
-
-  return function* (action = {}) {
-    const client = yield call(createSocket);
-    const clientChannel = yield call(
-      connectSocekt,
-      client,
-      connectType,
-      action,
-      buffers.expanding(500)
-    );
-
-    while (true) {
-      try {
-        const datas = yield flush(clientChannel); // 버퍼 데이터 가져오기
-        const state = yield select();
-
-        if (datas.length) {
-          const sortedObj = {};
-          datas.forEach((data) => {
-            if (sortedObj[data.code]) {
-              // 버퍼에 있는 데이터중 시간이 가장 최근인 데이터만 남김
-              sortedObj[data.code] =
-                sortedObj[data.code].timestamp > data.timestamp
-                  ? sortedObj[data.code]
-                  : data;
-            } else {
-              sortedObj[data.code] = data; // 새로운 데이터면 그냥 넣음
-            }
-          });
-
-          const sortedData = Object.keys(sortedObj).map(
-            (data) => sortedObj[data]
-          );
-
-          yield put({ type: SUCCESS, payload: dataMaker(sortedData, state) });
+    socket.onclose = function(event) {
+        if (event.wasClean) {
+            console.log("연결 종료");
+        } else {
+          // 예시: 프로세스가 죽거나 네트워크에 장애가 있는 경우
+          // event.code가 1006이 됩니다.
+          console.log("연결 끊김");
         }
-        yield delay(500); // 500ms 동안 대기
-      } catch (e) {
-        yield put({ type: ERROR, payload: e });
-      }
-    }
-  };
-};
+      };
+      
+    socket.onerror = function(error) {
+        console.log("error = " , error.message);
+    };
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+        if(coinData != coinDataToJSON.trade_price)
+        setCoinData(coinDataToJSON.trade_price);
+
+    }, 500);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [coinData]);
+
+
+    return(        
+        <>
+            <h1>Websocket Test</h1>
+
+            <h1>BitCoin {coinData}</h1>
+
+        </>
+    );
+}
+
+export default Websocket;
+
+
+
+    // function onOpen(evt)
+    // {
+    //     writeToScreen("연결완료");
+
+    //     var msg = [
+    //         {
+    //             "ticket"	: "TEST",
+    //         },
+    //         {
+    //             "type"		: "ticker",
+    //             "codes"		: ["KRW-BTC"]
+    //         }
+    //     ];
+    

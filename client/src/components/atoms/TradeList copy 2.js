@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import styled from "styled-components";
 import TradeChart from './TradeChart';
 
@@ -9,74 +9,90 @@ const TradeList = () => {
     let newObj = [];
     const [objCoin, setObjCoin] = useState();
     const [coinState, setCoinState] = useState("BTC");
-    const [countCheck, setCountCheck] = useState(0);
 
-    const useCoinChart = [
-        "KRW-BTC", "KRW-ETH", "KRW-BCH", 
-        "KRW-LTC", "KRW-ETC", "KRW-EOS", 
-        "KRW-XRP", "KRW-DOGE", "KRW-BTG"
-    ];
+    const [coinDataBTC, setCoinDataBTC] = useState(0);
+    const [coinDataETH, setCoinDataETH] = useState();
 
-    // useEffect(() => {
-        useEffect(async () => {
-            // await Axios.get("https://api.upbit.com/v1/ticker?markets=KRW-BTC&markets=KRW-ETH&markets=KRW-BCH&markets=KRW-LTC&markets=KRW-ETC&markets=KRW-EOS&markets=KRW-XRP&markets=KRW-DOGE&markets=KRW-BTG")
-            await Axios.get("https://api.upbit.com/v1/ticker?markets=KRW-BTC&markets=KRW-BTG")
-            .then((res) => {
-                for (let i = 0; i < res.data.length; i++)
-                {
-                    let prevP = res.data[i].prev_closing_price;
-                    let curP = res.data[i].trade_price;
-                    let changeRate;
-                    let changePrice;
+    // let arrCoinDataToJSON = [];
 
-                    changeRate = ((curP - prevP) / curP * 100).toFixed(2);
+    let coinDataType;
+    let coinDataBTCToJSON;
+    let coinDataETHToJSON = 0;
 
-                    if(0 < changeRate) changeRate = `+${changeRate}`
-                    changePrice = 0 < (curP - prevP) ? changePrice = `+${curP-prevP}` : changePrice = curP - prevP
-
-                    obj = {
-                        name : res.data[i].market.substring(4),
-                        price : res.data[i].trade_price,
-                        changeRate : changeRate,
-                        changePrice : changePrice
-                    }//
-
-                    if(res.data[i].market === "KRW-BTG")
-                    {
-                        // console.log("보노보노보노보노");
-                        obj.name = "BONO";
-                    }
-                    
-                    newObj.push(obj);
-                    // newObj[i] = obj[i];
-                }
-                    setObjCoin(newObj);
-                    // if(objCoin !== undefined)
-                    // {
-                    //     console.log("objCoin = " , objCoin);
-                    // }
-                    // console.log("objCoin = " , objCoin);
-                    // console.log("res.data[0].prev_closing_price = " , res.data[0].prev_closing_price);
-                    
-                    // console.log("res.data[0].signed_change_price = " , res.data[0].signed_change_price);
-                    // console.log("res.data[0].prev_closing_price = " , res.data[0].prev_closing_price);
-            }).catch((err) => {
-                console.log("err = " , err);
-            })
-        // };
-        // setInterval(() => {
-        //     // obj = {};
-        //     // newObj = [];
-        //     // setObjCoin();
-        //     setCountCheck(countCheck+1);
-        //     // setObjCoin(newObj);
-        //     // return () => clearInterval(inter);
-        // } , 15000);
-    },[]);
+    let price_BTC;
+    let price_ETH;
     
+    const socket = new WebSocket("wss://api.upbit.com/websocket/v1");
+
+    socket.onopen = (e) => {
+        socket.binaryType = 'arraybuffer';
+        console.log("연결 시작");
+
+        socket.send(JSON.stringify([
+            {"ticket":"June"},
+            {"type":"ticker","codes":["KRW-BTC"]},
+            {"type":"ticker","codes":["KRW-ETH"]},
+            // {"type":"ticker","codes":["KRW-BCH"]},
+            // {"type":"ticker","codes":["KRW-LTC"]},
+            // {"type":"ticker","codes":["KRW-ETC"]},
+            // {"type":"ticker","codes":["KRW-EOS"]},
+            // {"type":"ticker","codes":["KRW-XRP"]},
+            // {"type":"ticker","codes":["KRW-DOGE"]},
+            // {"type":"ticker","codes":["KRW-BTG"]},
+        ]));
+    };
+      
+    socket.onmessage = (event) => {
+        // console.log(event.data);
+
+        let utf8 = new TextDecoder("utf-8");
+        let unit8 = new Uint8Array(event.data);
+        // arrcoinDataBTCToJSON.push(JSON.parse(utf8.decode(unit8)));
+        coinDataType = JSON.parse(utf8.decode(unit8));
+        // console.log("coinDataType = " , coinDataType);
+
+        switch(coinDataType.code)
+        {
+            case "KRW-BTC":
+                price_BTC = coinDataType.trade_price;
+                // console.log("비트코인 확인");
+                break;
+            case "KRW-ETH":
+                price_ETH = coinDataType.trade_price;
+                // console.log("이더리움 확인");
+                break;
+        }
+    };
+    
+    socket.onclose = function(event) {
+        console.log("event.code" , event.code);
+        setTimeout(socket.onopen, 300);
+      };
+      
+    socket.onerror = function(error) {
+        console.log("error = " , error.message);
+    };
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+        if(coinDataBTC !== price_BTC)
+        {
+            setCoinDataBTC(price_BTC);
+        }
+    }, 500);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [coinDataBTC]);
+
     return (
         <>
             <TradeChart coinName={coinState} />
+
+            {/* <h1>Websocket Test</h1>
+            <h1>BitCoin {coinDataBTC}</h1> */}
+
             <ListBack>
                 <CoinNavBox>
                     <CoinNavImg />
@@ -87,7 +103,30 @@ const TradeList = () => {
                     </CoinNavTextBox>
                 </CoinNavBox>
 
-                {objCoin && objCoin.map((coin, index) => (
+                <CoinElementBox>
+                <CoinImageBox src={require(`../../assets/img/BTC.png`)} />
+                        <CoinTextBox>
+                            <CoinTextName>BTC</CoinTextName>
+                            <CoinChange>
+                                <CoinChangeRate></CoinChangeRate>
+                                <CoinChangePrice></CoinChangePrice>
+                            </CoinChange>
+                            <CoinTextPrice>{coinDataBTC}</CoinTextPrice>
+                        </CoinTextBox>
+                </CoinElementBox>
+                {/* <CoinElementBox>
+                <CoinImageBox src={require(`../../assets/img/ETH.png`)} />
+                        <CoinTextBox>
+                            <CoinTextName>ETH</CoinTextName>
+                            <CoinChange>
+                                <CoinChangeRate></CoinChangeRate>
+                                <CoinChangePrice></CoinChangePrice>
+                            </CoinChange>
+                            <CoinTextPrice>{coinDataETH}</CoinTextPrice>
+                        </CoinTextBox>
+                </CoinElementBox> */}
+
+                {/* {objCoin && objCoin.map((coin, index) => (
                     <CoinElementBox key={index} onClick={event=>{
                         setCoinState(coin.name);
                         event.preventDefault();
@@ -111,7 +150,7 @@ const TradeList = () => {
                                 </CoinTextPrice>
                             </CoinTextBox>
                     </CoinElementBox>
-                ))}
+                ))} */}
                 
             </ListBack>
             

@@ -12,6 +12,7 @@ const TradeList = () => {
 
     useEffect(async () => {
         await Axios.get("https://api.upbit.com/v1/ticker?markets=KRW-BTC&markets=KRW-ETH&markets=KRW-BCH&markets=KRW-LTC&markets=KRW-ETC&markets=KRW-EOS&markets=KRW-XRP&markets=KRW-DOGE&markets=KRW-BTG")
+        // await Axios.get("https://api.upbit.com/v1/ticker?markets=KRW-BTC&markets=KRW-BTG")
         .then((res) => {
 
             for (let i = 0; i < res.data.length; i++)
@@ -50,12 +51,27 @@ const TradeList = () => {
                 // console.log("res.data[0].prev_closing_price = " , res.data[0].prev_closing_price);
                 
                 // console.log("res.data[0].signed_change_price = " , res.data[0].signed_change_price);
-        });
+            }).catch((err) => {
+                console.log("err = " , err);
+            })
+        // };
+        // setInterval(() => {
+        //     // obj = {};
+        //     // newObj = [];
+        //     // setObjCoin();
+        //     setCountCheck(countCheck+1);
+        //     // setObjCoin(newObj);
+        //     // return () => clearInterval(inter);
+        // } , 15000);
     },[]);
     
     return (
         <>
             <TradeChart coinName={coinState} />
+
+            {/* <h1>Websocket Test</h1>
+            <h1>BitCoin {coinData}</h1> */}
+
             <ListBack>
                 <CoinNavBox>
                     <CoinNavImg />
