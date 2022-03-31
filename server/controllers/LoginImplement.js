@@ -6,6 +6,7 @@ module.exports = {
     
     //let api = dictionary
     public_string_AccountCheck: async (id, pw) => {
+        
         let CORRECT = 1 || "true", INCORRECT = 0 || "false";
         let id_check = await LoginDAO.AccountCheck.SelectID(id);
         let compareValue = await LoginDAO.AccountCheck.SelectPW(id, pw);
