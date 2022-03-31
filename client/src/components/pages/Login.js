@@ -2,8 +2,9 @@ import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
-
 import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 
 const Wrapper = styled.section`
   margin: 2em auto;
@@ -57,7 +58,7 @@ const InputWrap = styled.div`
 `;
 
 function Inputs() {
-
+ 
   const [id, setId] = useState();
   const [pw, setPw] = useState();
   const onChangeHandle1 = (e)=>{setId(e.target.value);  }
@@ -97,7 +98,7 @@ function Inputs() {
           </label>
           <br />
           {/* <Link to="/mypage"> */}
-            <Button size="lg" color="type2">
+            <Button type="submit" size="lg" color="type2">
               보노로그인
             </Button>
           {/* </Link> */}

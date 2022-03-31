@@ -11,13 +11,12 @@ const Wrapper = styled.section`
   /* background: papayawhip; */
 `;
 const Title = styled.h1`
-  /* margin-top: 8%; */
-  font-size: 1.5em;
+/* margin-top: 8%; */
+font-size: 1.5em;
   text-align: center;
   color: #80c7f2;
   /* color: palevioletred; */
-`;
-
+  `;
 const InputWrap = styled.div`
   width: 588px;
   height: 100%;
@@ -54,6 +53,7 @@ const InputWrap = styled.div`
     margin: 0.5vh 2vh;
   }
 `;
+
 const Contents = styled.div``;
 
 
@@ -97,18 +97,18 @@ function Inputs() {
             <br />
             <label>
               패스워드
-              <input
-                type="password"
-                name="pw"
-                value={pw || ""}
-                onChange={onChangeHandle2}
-                placeholder=" 8자리 이상의  영문,숫자,특수문자"
+              <input 
+              name="pw"
+              type="password"
+              value={pw || ""}
+              onChange={onChangeHandle2}
+              placeholder=" 8자리 이상의  영문,숫자,특수문자"
               />
             </label>
             <br />
             <label>
               패스워드 확인
-              <input
+              <input name="pw2"
                 type="password"
                 value={pw2 || ""}
                 onChange={onChangeHandle3}

@@ -1,5 +1,4 @@
 const LoginChk = require("./LoginImplement");
-const jwt = require("../util/com.ecum.auth/jwt-use");
 // console.log("Linked Loign Controller")
 
 module.exports = {
@@ -11,7 +10,10 @@ module.exports = {
     },
 
     LoginAuth: async (req, res, next) => {
+    
+      console.log("Login controller :", req.body.id, req.body.pw);
       let result = await LoginChk.public_string_AccountCheck(req.body.id, req.body.pw);
+      console.log("inputs", req.body.id, req.body.pw);
       console.log("finally result : ", result);
       return res.json(result);
     },
