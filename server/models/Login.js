@@ -1,4 +1,4 @@
-const getConn = require("./dbconn.js");
+const getConn = require("../util/db.js");
 
 module.exports = {
     AccountCheck: {
@@ -29,6 +29,8 @@ module.exports = {
                     try {
                         let sQuery = `SELECT pwd FROM users where id='${userid}'; `; 
                         conn.query(sQuery, (err, result) => { 
+                            console.log(JSON.stringify(result))
+                            if(result[0]["pwd"]== "") return console.log("undefined");
                             return resolve(result[0]["pwd"]);
                         });
                         conn.release();
