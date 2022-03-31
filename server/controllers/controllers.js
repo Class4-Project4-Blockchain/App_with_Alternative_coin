@@ -116,6 +116,29 @@ getAddressesbyAccount:{
     }
     },
 
+    ListTransactions:{
+      listtransactions: (req, res)=>{
+        var account = req.body.account;
+        console.log(account)
+    var dataString = `{"jsonrpc":"1.0","id":"${ID}","method":"listtransactions","params":["${account}"]}`;
+    var options = {
+        url: `http://${USER}:${PASS}@${URL}:${PORT}/`,
+        method: "POST",
+        headers: headers,
+        body: dataString
+    };
+
+  callback = (error, response, body) => {
+    if (!error && response.statusCode == 200) {
+      const data = JSON.parse(body);
+      res.send(data);
+      console.log(data);
+    }
+  };
+  request(options, callback);
+ }
+ },
+
   eApi: {
     getTest: async (req, res) => {
       let result = await testModel.getRead();
