@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
-import axios from "axios";
-axios.defaults.withCredentials = true
 
 const Wrapper = styled.section`
   margin: 2em auto;
@@ -58,60 +56,18 @@ const InputWrap = styled.div`
 
 function Inputs() {
 
-  let url =  "http://localhost:3001";//"https://api-tester.run.goorm.io" 
-  const headers = {
-    'Content-Type': 'text/plain',
-    "Access-Control-Allow-Origin" : "*"
-  };
-  const [Inputs, setInputs] = useState({
-    id:"", pw:""
-  });
-  const {id, pw} = Inputs;
-
-  const onChange = (e) =>{
-    const { name, value } = e.target;
-    setInputs({
-      ...Inputs,
-      [name]:value
-    })
-  }
-
-  const onSubmit =  (e)=>{
-    e.preventDefault(); // submit 이벤트 발생시 refresh 방지
-    console.log({Inputs})
-
-  axios.post(url+"/users/login", {id:Inputs.id, pw:Inputs.pw}, {headers})
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-          console.log(err)
-    })
-    setInputs({
-      userid : id,
-      password : '',
-    });
-  }
   return (
     <>
       <InputWrap>
-        <form onSubmit={onSubmit}>
+        <form action="https://api-tester.run.goorm.io/users/login" method="post">
           <label>
             아이디
-            <input type="text" placeholder="아이디 입력" 
-            name="id"
-            value={id || ""}
-            onChange={onChange}
-            />
+            <input type="text" placeholder="아이디 입력" />
           </label>
           <br />
           <label>
             패스워드
-            <input type="text" placeholder="패스워드 입력"
-            name="pw"
-             value={pw || ""}
-             onChange={onChange}
-            />
+            <input type="text" placeholder="패스워드 입력" />
           </label>
           <br />
           {/* <Link to="/mypage"> */}

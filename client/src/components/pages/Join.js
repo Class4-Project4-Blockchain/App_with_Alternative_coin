@@ -1,9 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
-import axios from "axios";
-axios.defaults.withCredentials = true
 
 const Wrapper = styled.section`
   margin: 2em auto;
@@ -57,67 +55,22 @@ const InputWrap = styled.div`
 `;
 const Contents = styled.div``;
 
-
 function Inputs() {
-  const [Inputs, setInputs] = useState({
-    id: "", pw: "", pw2:"", email:""
-  });
-  const {id, pw, pw2, email} = Inputs;
-
-const axiosLogin = ()=>{
-}
-
-const onChange = (e)=> {
-  console.log(e.target.value);
-    const {value, name} = e.target;
-    setInputs({
-      ...Inputs,
-      [name]:value
-    });
-
-    setInputs({
-      id:id,
-      pw:"",
-      pw2:"",
-      email:email
-    })
-  }
-const onSubmit = async (e)=>{
-  e.preventDefault(); // submit 이벤트 발생시 refresh 방지
-  console.log({Inputs})
-
-  let url = /*"https://api-tester.run.goorm.io" || */"http://localhost:3001";
-  let option = { url, Inputs, }
-  const headers = {
-    'Content-Type': 'text/plain'
-  };
-  await axios.post(option, {headers}, { withCredentials: true })
-    .then(res =>{console.log(res.data)})
-    .catch(error=>{console.log(error)});
-}
   return (
     <>
       <InputWrap>
         <Contents>
-          <form onSubmit={onSubmit} >
+          <form action="https://api-tester.run.goorm.io/users/join" method="post">
             <label>
               아이디
-              <input 
-              type="text" 
-              placeholder=" 아이디 입력" 
-              name="id"
-              value={id || ""} 
-              onChange={onChange} required/>
+              <input type="text" placeholder=" 아이디 입력" />
             </label>
             <br />
             <label>
               패스워드
               <input
                 type="password"
-                name="pw"
                 placeholder=" 8자리 이상의  영문,숫자,특수문자"
-                value={pw || ""}
-                onChange={onChange}
               />
             </label>
             <br />
@@ -125,22 +78,13 @@ const onSubmit = async (e)=>{
               패스워드 확인
               <input
                 type="password"
-                name="pw2"
                 placeholder=" 8자리 이상의  영문,숫자,특수문자"
-                value={pw2 || ""}
-                onChange={onChange}
               />
             </label>
             <br />
             <label>
               이메일 입력
-              <input 
-              type="email" 
-              name="email"
-              placeholder=" 이메일입력"
-              value={email || ""}
-              onChange={onChange}
-              />
+              <input type="email" placeholder=" 이메일입력" />
             </label>
             <br />
             <Link to="/mypage">

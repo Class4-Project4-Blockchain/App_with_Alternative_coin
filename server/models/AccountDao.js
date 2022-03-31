@@ -1,4 +1,4 @@
-const getConn = require("../util/db.js");
+const getConn = require("../util/db");
 // console.log("Linked Loign DAO")
 module.exports = {
     AccountCheck: {
@@ -36,19 +36,6 @@ module.exports = {
                 })
             })
         },
-        SelectEmail : async (userid) => {
-            return new Promise((resolve, reject) => {
-                getConn((conn) => {
-                    try {
-                        let sQuery = `SELECT email FROM users where id='${userid}'; `; 
-                        conn.query(sQuery, (err, result) => { 
-                            return resolve(result[0]["email"]);
-                        });
-                        conn.release();
-                    } catch (err) { console.err(err); }
-                })
-            })
-        },
     },
     addAccount:async (userid, hashpwd, email)=> {
         return new Promise( (resolve, reject) => {
@@ -62,5 +49,5 @@ module.exports = {
                 } catch (err) { console.error(err); }
             })
         })   
-    }, 
+    } 
 }
