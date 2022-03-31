@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
 import TradeChart from './TradeChart';
 
@@ -9,48 +9,69 @@ const TradeList = () => {
     let newObj = [];
     const [objCoin, setObjCoin] = useState();
     const [coinState, setCoinState] = useState("BTC");
+    const [countCheck, setCountCheck] = useState(0);
 
-    useEffect(async () => {
-        await Axios.get("https://api.upbit.com/v1/ticker?markets=KRW-BTC&markets=KRW-ETH&markets=KRW-BCH&markets=KRW-LTC&markets=KRW-ETC&markets=KRW-EOS&markets=KRW-XRP&markets=KRW-DOGE&markets=KRW-BTG")
-        .then((res) => {
+    const useCoinChart = [
+        "KRW-BTC", "KRW-ETH", "KRW-BCH", 
+        "KRW-LTC", "KRW-ETC", "KRW-EOS", 
+        "KRW-XRP", "KRW-DOGE", "KRW-BTG"
+    ];
 
-            for (let i = 0; i < res.data.length; i++)
-            {
-                let prevP = res.data[i].prev_closing_price;
-                let curP = res.data[i].trade_price;
-                let changeRate;
-                let changePrice;
-
-                changeRate = ((curP - prevP) / curP * 100).toFixed(2);
-
-                if(0 < changeRate) changeRate = `+${changeRate}`
-                changePrice = 0 < (curP - prevP) ? changePrice = `+${curP-prevP}` : changePrice = curP - prevP
-
-                obj = {
-                    name : res.data[i].market.substring(4),
-                    price : res.data[i].trade_price,
-                    changeRate : changeRate,
-                    changePrice : changePrice
-                }//
-
-                if(res.data[i].market === "KRW-BTG")
+    // useEffect(() => {
+        useEffect(async () => {
+            // await Axios.get("https://api.upbit.com/v1/ticker?markets=KRW-BTC&markets=KRW-ETH&markets=KRW-BCH&markets=KRW-LTC&markets=KRW-ETC&markets=KRW-EOS&markets=KRW-XRP&markets=KRW-DOGE&markets=KRW-BTG")
+            await Axios.get("https://api.upbit.com/v1/ticker?markets=KRW-BTC&markets=KRW-BTG")
+            .then((res) => {
+                for (let i = 0; i < res.data.length; i++)
                 {
-                    // console.log("보노보노보노보노");
-                    obj.name = "BONO";
+                    let prevP = res.data[i].prev_closing_price;
+                    let curP = res.data[i].trade_price;
+                    let changeRate;
+                    let changePrice;
+
+                    changeRate = ((curP - prevP) / curP * 100).toFixed(2);
+
+                    if(0 < changeRate) changeRate = `+${changeRate}`
+                    changePrice = 0 < (curP - prevP) ? changePrice = `+${curP-prevP}` : changePrice = curP - prevP
+
+                    obj = {
+                        name : res.data[i].market.substring(4),
+                        price : res.data[i].trade_price,
+                        changeRate : changeRate,
+                        changePrice : changePrice
+                    }//
+
+                    if(res.data[i].market === "KRW-BTG")
+                    {
+                        // console.log("보노보노보노보노");
+                        obj.name = "BONO";
+                    }
+                    
+                    newObj.push(obj);
+                    // newObj[i] = obj[i];
                 }
-                
-                newObj.push(obj);
-            }
-                setObjCoin(newObj);
-                // if(objCoin !== undefined)
-                // {
-                //     console.log("objCoin = " , objCoin);
-                // }
-                // console.log("objCoin = " , objCoin);
-                // console.log("res.data[0].prev_closing_price = " , res.data[0].prev_closing_price);
-                
-                // console.log("res.data[0].signed_change_price = " , res.data[0].signed_change_price);
-        });
+                    setObjCoin(newObj);
+                    // if(objCoin !== undefined)
+                    // {
+                    //     console.log("objCoin = " , objCoin);
+                    // }
+                    // console.log("objCoin = " , objCoin);
+                    // console.log("res.data[0].prev_closing_price = " , res.data[0].prev_closing_price);
+                    
+                    // console.log("res.data[0].signed_change_price = " , res.data[0].signed_change_price);
+                    // console.log("res.data[0].prev_closing_price = " , res.data[0].prev_closing_price);
+            }).catch((err) => {
+                console.log("err = " , err);
+            })
+        // };
+        // setInterval(() => {
+        //     // obj = {};
+        //     // newObj = [];
+        //     // setObjCoin();
+        //     setCountCheck(countCheck+1);
+        //     // setObjCoin(newObj);
+        //     // return () => clearInterval(inter);
+        // } , 15000);
     },[]);
     
     return (
