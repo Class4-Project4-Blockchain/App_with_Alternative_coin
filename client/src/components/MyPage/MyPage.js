@@ -129,12 +129,13 @@ const sendToAddressSubmit = async (event) => {
               <MyPageTitle>송금</MyPageTitle>
               <MyPageList>
                 <li>
-                  보낼지갑주소 
+                  
                   <form onSubmit={sendToAddressSubmit} style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '5px', borderRadius: '10px'}}>
-                  <input name="sendAddress" onChange={handlechange2} value={sendAddress || ''} style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>                  
+                  보낼지갑주소 
+                  <input name="sendAddress" onChange={handlechange2} value={sendAddress || ''} style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px', marginTop:'5px', marginBottom:'5px'}}/>                  
                   보내는수량 
-                  <input name="sendAmount" onChange={handlechange3} value={sendAmount || ''} style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}} placeholder='0.00000000'/> 
-                  <button style={{width : '400px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '10px', borderRadius: '10px'}} type="submit">보내기</button>              
+                  <input name="sendAmount" onChange={handlechange3} value={sendAmount || ''} style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px', marginTop:'5px', marginBottom:'5px'}} placeholder='0.00000000'/> 
+                  <button style={{width : '550px' ,marginTop:'20px',marginBottom : '20px' , border : '1px solid #23518C', padding: '10px', borderRadius: '10px'}} type="submit">보내기</button>              
                   </form>  
                 </li>
                      
