@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Button from "../atoms/Button";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+import { useDispatch } from 'react-redux'
+// import { loginUser } from '../../../_actions/user_action'
+// import {loginDB, signUpDB} from "../../modules/account.js";
+
+
+//form axios
+import axios from "axios";
+axios.defaults.withCredentials = true;
+// const headers = { withCredentials: true };
+
 
 const Wrapper = styled.section`
   margin: 2em auto;
@@ -10,13 +20,12 @@ const Wrapper = styled.section`
   /* background: papayawhip; */
 `;
 const Title = styled.h1`
-  /* margin-top: 8%; */
-  font-size: 1.5em;
+/* margin-top: 8%; */
+font-size: 1.5em;
   text-align: center;
   color: #80c7f2;
   /* color: palevioletred; */
-`;
-
+  `;
 const InputWrap = styled.div`
   width: 588px;
   height: 100%;
@@ -53,22 +62,78 @@ const InputWrap = styled.div`
     margin: 0.5vh 2vh;
   }
 `;
+
 const Contents = styled.div``;
 
+// function joinUser(){
+  
 function Inputs() {
+
+  // const [id, setId] = useState("");
+  // const [pw, setPw] = useState("");
+  // const [pw2, setPw2] = useState("");
+  // const [email, setEmail] = useState("");
+  const [Inputs, setInputs] = useState({
+    id:"", 
+    pw:"", 
+    pw2:"", 
+    email:""
+  })
+  const { id, pw, pw2, email} = Inputs;
+
+  const onChange = (e) => {
+    const {value, name} = e.target;
+    setInputs({
+      ...Inputs,
+      [name]: value
+    });
+  }
+
+        let data = {
+        id: id,
+        pw: pw, 
+        pw2:pw2, 
+        email:email
+      };
+      const headers = {
+        'Content-Type': 'text/plain', withCredentials: true
+      };
+      const targetUrl = "https://api-tester.run.goorm.io" //|| "http://localhost:3001";
+    const JoinSubmit = (e) => {
+    // let dispatch = useDispatch();
+        console.log({Inputs})
+        e.preventDefault();
+        // const option = {
+          //   method: "post",
+          //   url: targetUrl + "/users/join",
+          //   data: data,
+          // }
+    
+        axios.post(targetUrl + "/users/join", data, {headers} )
+        .then(res=>console.log(res));
+
+
+        setInputs({
+          id:id, pw:"", pw2:"", email:email
+        })
+    
+  }
+
   return (
     <>
       <InputWrap>
         <Contents>
-          <form action="https://api-tester.run.goorm.io/users/join" method="post">
+          <form onSubmit={JoinSubmit}>
             <label>
               아이디
-              <input type="text" placeholder=" 아이디 입력" />
+              <input type="text" name="id" placeholder=" 아이디 입력" value={id} onChange={ onChange } />
             </label>
             <br />
             <label>
               패스워드
-              <input
+              <input onChange={ onChange} name="pw"
+              value={pw}
+                 
                 type="password"
                 placeholder=" 8자리 이상의  영문,숫자,특수문자"
               />
@@ -76,7 +141,9 @@ function Inputs() {
             <br />
             <label>
               패스워드 확인
-              <input
+              <input onChange={onChange}   name="pw2"
+                value={pw2}
+                
                 type="password"
                 placeholder=" 8자리 이상의  영문,숫자,특수문자"
               />
@@ -84,14 +151,14 @@ function Inputs() {
             <br />
             <label>
               이메일 입력
-              <input type="email" placeholder=" 이메일입력" />
+              <input type="email" placeholder=" 이메일입력" name="email" value={email} onChange={onChange} />
             </label>
             <br />
-            <Link to="/mypage">
-              <Button size="lg" color="type2">
-                보노 회원가입
-              </Button>
-            </Link>
+            {/* <Link to="/mypage"> */}
+            <Button size="lg" color="type2" /*onClick={login}*/ >
+              보노 회원가입
+            </Button>
+            {/* </Link> */}
             <br />
             <Link to="/mypage">
               <input

@@ -1,7 +1,9 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
+import axios from "axios";
 import styled from "styled-components";
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
+axios.defaults.withCredentials = true;
 
 const Wrapper = styled.section`
   margin: 2em auto;
@@ -55,23 +57,66 @@ const InputWrap = styled.div`
 `;
 
 function Inputs() {
+  // const [id, setId] = useState();
+  // const [pw, setPw] = useState();
+        const [inputs, setInputs] = useState({id:"", pw:""});
+        const {id, pw} = inputs;
+  
+  
+        const onChange = (e) => {
+          const {value, name} = e.target;
+          setInputs({
+            ...inputs,
+            [name]: value
+          });
+        }
+  // const data = {
+  //   id: id, pw: pw,
+  // }
+        const url = "https://api-tester.run.goorm.io"
+        const headers = {
+        'Content-Type': 'text/plain'
+        }
+  const onSubmit = (e) => {
+    e.preventDefault(); // submit 이벤트 발생시 refresh 방지
+    console.log({inputs})
+    
+    axios.post(url+"/users/login", inputs, {headers} /*{mode:"cors"}*/)
+    .then(response => {console.log(response)})
+    .catch(error => { console.log(error) })
+    setInputs({
+      id : id,
+      pw : ''
+    });
+  }
+  
+   
+/*
+const getResults = async()=>{ return "test";};
+const App = () =>{
+const result = getResults().then(res => console.log(res));
+return null;
+}
+App();
+*/
 
+  
   return (
     <>
       <InputWrap>
-        <form action="https://api-tester.run.goorm.io/users/login" method="post">
+        <form onSubmit={onSubmit} >
           <label>
             아이디
-            <input type="text" placeholder="아이디 입력" />
+            <input type="text" name="id" onChange={onChange} value={inputs.id} placeholder="아이디 입력"  />
           </label>
           <br />
           <label>
             패스워드
-            <input type="text" placeholder="패스워드 입력" />
+            <input type="text" name="pw" onChange={onChange} value={inputs.pw}  placeholder="패스워드 입력" />
           </label>
           <br />
           {/* <Link to="/mypage"> */}
-            <Button size="lg" color="type2">
+            <Button type="submit" size="lg" color="type2">
               보노로그인
             </Button>
           {/* </Link> */}

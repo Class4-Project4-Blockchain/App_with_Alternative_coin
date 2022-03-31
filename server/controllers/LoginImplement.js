@@ -6,6 +6,7 @@ module.exports = {
     
     //let api = dictionary
     public_string_AccountCheck: async (id, pw) => {
+        if(id == undefined || pw == undefined ) return {response: "deny", message:"빈칸을 확인해주세요."}
         let CORRECT = 1 || "true", INCORRECT = 0 || "false";
         let id_check = await LoginDAO.AccountCheck.SelectID(id);
         let compareValue = await LoginDAO.AccountCheck.SelectPW(id, pw);
@@ -13,19 +14,19 @@ module.exports = {
 
         if (id_check == INCORRECT) {
             // console.log("exist", "id :", id, "pw :", pw);
-            return ({ results: INCORRECT, message: "아이디가 존재하지 않거나 확인이 필요합니다.", id: id_check });
+            return ({ result: INCORRECT, message: "아이디가 존재하지 않거나 확인이 필요합니다.", id: id_check });
         }
         else if (id_check == CORRECT && pw_check == INCORRECT) {
             // console.log("exist ", "id :", id, "pw :", pw);
-            return ({ results: INCORRECT, message: "패스워드를 다시 확인해주세요.", id: id_check, pw:pw_check });
+            return ({ result: INCORRECT, message: "패스워드를 다시 확인해주세요.", id: id_check, pw:pw_check });
         }
         else if (id_check == CORRECT && pw_check == CORRECT) {
             // console.log("exist ", "id :", id_check, "pw :", pw_check);
-            return ({ results: CORRECT, message: "로그인 성공"})
+            return ({ result: CORRECT, message: "로그인 성공"})
         }
         else {
             console.log("exist ", "id :", id_check, "pw :", pw_check);
-            return ({ results: id_check + " and " + pw_check, message: "통신에러. 다시 시도합니다."  })
+            return ({ result: id_check + " and " + pw_check, message: "통신에러. 다시 시도합니다."  })
         }
     }
     
