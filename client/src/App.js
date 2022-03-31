@@ -1,3 +1,4 @@
+/* App.js */
 import './assets/css/App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -8,6 +9,7 @@ import Login from './components/pages/Login';
 import "./assets/css/App.css";
 import Join from "./components/pages/Join";
 import Reference from "./components/pages/Reference";
+import Logout from "./components/pages/Logout";
 
 function App() {
   // const [Dbdata, SetDbdata] = useState([]);
@@ -60,24 +62,23 @@ function App() {
     // var dinfo = window.localStorage.getItem(d.no);
 
     // console.log(dinfo);
-  
 
 
   return (
     <>
       <Routes>
         {/* <Route path="/" element={<Main />} /> */}
-        <Route path="/" element={<Reference />} />
+        <Route path="/" element={<Trade />} />
         <Route path="/trade" element={<Trade />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/*" element={<Trade />} />
       </Routes>
     </>
   );
 }
-
-  
 
 // 안성준. 노드몬 동시 실행안돼서 package.json 에서 잠시 옮겨둠.
 // "start": "npm-run-all -p starts:**",
