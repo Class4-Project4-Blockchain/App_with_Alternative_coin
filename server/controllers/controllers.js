@@ -2,7 +2,7 @@ const testModel = require("../models/models");
 // const blockDao = require("../models/AccountDao");
 // const addBlockDao = require("../models/addBlockDao");
 const request = require("request");
-require("dotenv").config({ path: __dirname + "/.env" });
+require("dotenv").config({ path: __dirname + "./utils/.env" });
 
 const USER = process.env.RPC_USER;
 const PASS = process.env.RPC_PASS;

@@ -1,5 +1,5 @@
 const LoginChk = require("./LoginImplement");
-const jwt = require("../util/com.ecum.auth/jwt-use");
+const jwt = require("../utils/com.ecum.auth/jwt-use");
 // console.log("Linked Loign Controller")
 
 module.exports = {

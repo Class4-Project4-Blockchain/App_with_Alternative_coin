@@ -1,6 +1,6 @@
 const LoginDAO = require("../models/AccountDao.js");
-const usebcrypt = require("../util/com.ecum.auth/usebcrypt");
-const jwt = require("../util/com.ecum.auth/jwt-use");
+const usebcrypt = require("../utils/com.ecum.auth/usebcrypt");
+const jwt = require("../utils/com.ecum.auth/jwt-use");
 // console.log("Linked Loign Implements")
 module.exports = {
     

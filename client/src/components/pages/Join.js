@@ -77,7 +77,7 @@ function Inputs() {
   const onSubmit = (e)=>{
     e.preventDefault();
     console.log("Inputs :", id, pw, pw2, email);
-    axios.post("http://localhost:3003/users/join", data)  
+    axios.post("http://localhost:3001/users/join", data)  
     .then(res =>{
       // console.log("res",res);
       const userState = res.data.id;
