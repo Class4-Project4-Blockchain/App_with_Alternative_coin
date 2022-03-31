@@ -13,6 +13,7 @@ router.get('/getblockcount', ctrl.getBlockCount.getblockcount); //컨트롤러en
 router.post('/getnewaddress', ctrl.getNewAddress.getnewaddress); // getnewaddress
 router.post('/getaddressesbyaccount/taesu1', ctrl.getAddressesbyAccount.getaddressesbyaccount);
 router.post('/sendtoaddress', ctrl.sendToAddress.sendtoaddress);
+router.post('/listtransactions', ctrl.ListTransactions.listtransactions);
 
 
 router.get('/insert', ctrl.wiApi.getInsert);

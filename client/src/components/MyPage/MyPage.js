@@ -17,6 +17,9 @@ function MyPage() {
   const [disabled, setDisabled] = useState(false);
   const [sendAddress, SetAddress] = useState('');
   const [sendAmount, SetAmount] = useState('');
+  const [Bvalue, BSetValue] = useState('');
+  const [Cvalue, CSetValue] = useState('');
+  const [Dvalue, DSetValue] = useState('');
 
   useEffect(()=>{ //마이페이지에 들어왔을 때 콘솔에 walletinfo 띄움.
     axios.get('http://localhost:3001/mywallet/show').then(({data})=>{
@@ -35,6 +38,7 @@ function MyPage() {
 const handlechange = ({ target: { value }}) => SetValue(value);
 const handlechange2 = ({ target: { value }}) => SetAddress(value);
 const handlechange3 = ({ target: { value }}) => SetAmount(value);
+const handlechange4 = ({ target: { value }}) => BSetValue(value);
 
 const IDSubmit = async (event) => {
   setDisabled(true);
@@ -70,6 +74,34 @@ axios.post('http://localhost:3001/mywallet/getaddressesbyaccount/taesu1',{
   setDisabled(false);
   
 };
+//↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑지갑찾기
+
+// ↓↓↓↓↓↓↓ 거래내역
+
+const listTransactionsSubmit = async (event) => {
+  setDisabled(true);
+  event.preventDefault();
+  await new Promise((r) => setTimeout(r, 1000));
+  alert(`거래내역 확인할 지갑의 주소: ${Bvalue}`);
+console.log(Bvalue)
+axios.post('http://localhost:3001/mywallet/listtransactions',{
+  account: Bvalue
+}).then((data)=>{
+  // console.log(data.data.result);
+  data.data.result.reverse();
+  console.log(data.data.result);
+  CSetValue("블록해쉬값: " + data.data.result[0].blockhash);
+  DSetValue("txid값: " +  data.data.result[0].txid);
+  
+ 
+  // console.log(Reverseforlist);
+  
+  // console.log("블록해쉬값: " + data.data.result.reverse());
+  // console.log("txid값: " +  data.data.result.reverse())
+});
+setDisabled(false);
+}
+//↑↑↑↑↑↑↑↑ 거래내역
 
 // ↓↓↓↓↓↓↓↓↓↓↓ 코인보내기
 const sendToAddressSubmit = async (event) => {
@@ -90,6 +122,13 @@ const sendToAddressSubmit = async (event) => {
 }
 // ↑↑↑↑↑↑↑↑↑↑↑↑↑ 코인 보내기
 // console.log(Dbdata);
+console.log(Bvalue);
+const selectList = ["bonocoin", "bitcoin", "etherium", "litecoin"];
+  const [Selected, setSelected] = useState("");
+
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
+  };
     return (
       <>
           <MyPageBox>
@@ -106,6 +145,17 @@ const sendToAddressSubmit = async (event) => {
                   <input value={Dbdata.email || ''} onChange={handlechange} style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
                   </input> 
                 </li> 
+                코인 보유 수량
+                <li>                
+                <select onChange={handleSelect} value={Selected} style={{width : '40%' ,marginTop : '10px',marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
+                  {selectList.map((item) => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+                <input type='text' placeholder='0.00000000' onChange={handlechange} style={{width: '53%', marginBottom : '20px' , marginLeft : '10px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}></input> 
+                </li>
                 <li>
                   <form onSubmit={IDSubmit}>
                     
@@ -145,9 +195,13 @@ const sendToAddressSubmit = async (event) => {
               <MyPageTitle>송금내역</MyPageTitle>
               <MyPageList>
                 <li>
-                  최근 송금내역
-                  <form style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px',borderRadius: '10px'}}>
-                  <input style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>
+                  <form onSubmit={listTransactionsSubmit} style={{marginBottom : '20px' , border : '1px solid #23518C', padding: '20px',borderRadius: '10px'}}>
+                  <input placeholder='내역찾을 id입력' name="Bvalue" value={Bvalue || ''} onChange={handlechange4} style={{width : '303px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
+                  </input>  
+                  <button type="submit" disabled={disabled} style={{marginLeft : '10px', width : '170px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '10px', borderRadius: '10px'}} >내역 검색</button>
+                  최근 송금내역(latest blockhash + 해당 txid)
+                  <input value={Cvalue || ''} onChange={handlechange4} style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>
+                  <input value={Dvalue || ''} onChange={handlechange4} style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>
                   </form> 
                 </li>                     
               </MyPageList>
