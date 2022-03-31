@@ -1,5 +1,5 @@
 const AccountDao = require("../models/AccountDao.js");
-const usebcrpyt = require("../util/com.ecum.auth/usebcrypt");
+const usebcrpyt = require("../utils/com.ecum.auth/usebcrypt");
 module.exports = {
     public_string_AddAccount: async (userid, pwd, pwd2, email) => {
         try{
