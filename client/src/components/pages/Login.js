@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { useState } from 'react';
 
 
 const Wrapper = styled.section`
@@ -91,7 +92,7 @@ function Inputs() {
   return (
     <>
       <InputWrap>
-        <form action="https://api-tester.run.goorm.io/users/login" method="post">
+        <form onSubmit={onSubmit} method="post">
           <label>
             아이디
             <input type="text" 
