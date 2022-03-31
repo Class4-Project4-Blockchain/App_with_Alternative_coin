@@ -89,6 +89,33 @@ getAddressesbyAccount:{
   }
   },
 
+  sendToAddress:{
+    sendtoaddress: (req, res) =>{
+      var address = req.body.address;
+      var amount = req.body.amount;
+      console.log(address);
+      console.log(amount);
+      // res.send(`Account : ${account}`);
+      var dataString = `{"jsonrpc":"1.0","id":"${ID}","method":"sendtoaddress","params":["${address}", "${amount}"]}`;
+    var options = {
+      url: `http://${USER}:${PASS}@${URL}:${PORT}/`,
+      method: "POST",
+      headers: headers,
+      body: dataString
+    };
+  
+    callback = (error, response, body) => {
+      if (!error && response.statusCode == 200) {
+        const data = JSON.parse(body);
+        res.send(data);
+        console.log(data);
+      }
+    };
+    request(options, callback);
+    console.log('코인보내기 완료')
+    }
+    },
+
   eApi: {
     getTest: async (req, res) => {
       let result = await testModel.getRead();
