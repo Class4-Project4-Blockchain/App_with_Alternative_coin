@@ -103,6 +103,9 @@ function Header() {
             <NavLink to="/mypage">
               <NavMenuMyPage>MyPage</NavMenuMyPage>
             </NavLink>
+            <NavLink to="/logout">
+              <NavMenuMyPage>LogOut</NavMenuMyPage>
+            </NavLink>
             {/* <NavLink to="/login">
               <NavMenuSignIn>LogIn</NavMenuSignIn>
             </NavLink>
