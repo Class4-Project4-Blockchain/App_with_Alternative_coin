@@ -10,11 +10,18 @@ module.exports = {
       let pwd2 = req.body.pw2;
       let email = req.body.email;
       console.log("join -> c", req.body.id, req.body.pw, req.body.pw2, req.body.email);
-      
-      let result = await addAccount.public_string_AddAccount(id, pwd, pwd2, email );
-      console.log("join controller result :", result);
-      // res.header("Access-Control-Allow-Origin", "*");
-      return res.json({results: result})
+      try{
+
+        let result = await addAccount.public_string_AddAccount(id, pwd, pwd2, email );
+        if(result == "response:success") return res.json({id:req.body.id})
+        
+          console.log("join controller result :", result);
+          console.log("result.response" , result.response)      
+        
+        return res.json({results: result})
+      }catch(err){
+        console.error(err);
+      }
     },
   }
 }

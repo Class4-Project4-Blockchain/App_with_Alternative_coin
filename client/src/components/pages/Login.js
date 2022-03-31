@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-axios.defaults.withCredentials = true;
 
 
 const Wrapper = styled.section`
@@ -73,7 +72,20 @@ function Inputs() {
     e.preventDefault();
     console.log("Inputs :", id, pw);
     axios.post("http://localhost:3003/users/login", data)  
-    .then(res =>{console.log(res)})
+    .then(res =>{
+      console.log(res);
+      const {result} = res.data;
+      const userState = JSON.stringify(result);
+      if(userState){
+        window.localStorage.setItem('user',  userState);
+        window.location.replace('/trade');
+      }
+      else{
+        window.alert("올바른 email과 비밀번호를 입력해주세요")
+      }
+      // window.location.replace('/');
+  })
+    
     .catch(err =>{console.error(err)})
   }
   return (
@@ -82,15 +94,17 @@ function Inputs() {
         <form onSubmit={onSubmit}>
           <label>
             아이디
-            <input type="text" name="id"
+            <input type="text" 
+              name="id"
               value={id || ""}
               onChange={onChangeHandle1}
-               placeholder=" 아이디 입력" />
+              placeholder=" 아이디 입력" />
           </label>
           <br />
           <label>
             패스워드
-            <input type="text" name="pw"
+            <input type="text" 
+              name="pw"
               value={pw || ""}
               onChange={onChangeHandle2}
               placeholder=" 8자리 이상의  영문,숫자,특수문자"

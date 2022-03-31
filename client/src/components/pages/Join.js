@@ -78,7 +78,15 @@ function Inputs() {
     e.preventDefault();
     console.log("Inputs :", id, pw, pw2, email);
     axios.post("http://localhost:3003/users/join", data)  
-    .then(res =>{console.log(res)})
+    .then(res =>{
+      // console.log("res",res);
+      const userState = res.data.id;
+      if(userState){
+        window.localStorage.setItem('user',  userState);
+        window.location.replace('/trade');
+      }
+    
+    })
     .catch(err =>{console.error(err)})
   }
   return (
