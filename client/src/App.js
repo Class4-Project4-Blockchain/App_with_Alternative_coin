@@ -60,6 +60,7 @@ function App() {
     // var dinfo = window.localStorage.getItem(d.no);
 
     // console.log(dinfo);
+  
 
 
   return (
@@ -75,6 +76,8 @@ function App() {
     </>
   );
 }
+
+  
 
 // 안성준. 노드몬 동시 실행안돼서 package.json 에서 잠시 옮겨둠.
 // "start": "npm-run-all -p starts:**",

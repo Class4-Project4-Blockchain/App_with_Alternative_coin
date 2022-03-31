@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import styled from "styled-components";
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { useState } from 'react';
 
 
 const Wrapper = styled.section`
@@ -91,7 +92,7 @@ function Inputs() {
   return (
     <>
       <InputWrap>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} method="post">
           <label>
             아이디
             <input type="text" 
