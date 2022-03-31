@@ -1,9 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import styled from "styled-components";
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
-
-import axios from 'axios';
 
 const Wrapper = styled.section`
   margin: 2em auto;
@@ -58,42 +56,18 @@ const InputWrap = styled.div`
 
 function Inputs() {
 
-  const [id, setId] = useState();
-  const [pw, setPw] = useState();
-  const onChangeHandle1 = (e)=>{setId(e.target.value);  }
-  const onChangeHandle2 = (e)=>{    setPw(e.target.value);  }
-
-
-  const data = {
-    id: id,
-    pw: pw,
-  }
-  const onSubmit = (e)=>{
-    e.preventDefault();
-    console.log("Inputs :", id, pw);
-    axios.post("http://localhost:3003/users/login", data)  
-    .then(res =>{console.log(res)})
-    .catch(err =>{console.error(err)})
-  }
   return (
     <>
       <InputWrap>
-        <form onSubmit={onSubmit}>
+        <form action="https://api-tester.run.goorm.io/users/login" method="post">
           <label>
             아이디
-            <input type="text" name="id"
-              value={id || ""}
-              onChange={onChangeHandle1}
-               placeholder=" 아이디 입력" />
+            <input type="text" placeholder="아이디 입력" />
           </label>
           <br />
           <label>
             패스워드
-            <input type="text" name="pw"
-              value={pw || ""}
-              onChange={onChangeHandle2}
-              placeholder=" 8자리 이상의  영문,숫자,특수문자"
-              />
+            <input type="text" placeholder="패스워드 입력" />
           </label>
           <br />
           {/* <Link to="/mypage"> */}

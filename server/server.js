@@ -20,8 +20,8 @@ app.use('/mywallet', mywallet);
 
 app.get("/", (req, res)=>{res.send("Backend Connected")})
 
-const host = 'localhost';
-const port = 3003;
+const host = process.env.APPHOST || 'localhost';
+const port = process.env.APPPORT || 3001;
 
 app.listen(port, () => console.log(`Node.js server is running at http://${host}:${port}/`));
 
