@@ -13,7 +13,6 @@ module.exports = {
     LoginAuth: async (req, res, next) => {
       let result = await LoginChk.public_string_AccountCheck(req.body.id, req.body.pw);
       console.log("finally result : ", result);
-      // if(results[0]==1) return jwt.createToken;
       return res.json(result);
     },
 
