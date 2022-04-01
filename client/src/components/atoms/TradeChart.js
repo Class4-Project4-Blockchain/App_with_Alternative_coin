@@ -105,6 +105,7 @@ function TradeChart(props) {
 
 // 조건문을 붙여 초기 빈 데이터 상황 시
 // column 이 부족해 오류 메시지가 뜨는 상황을 막음.
+
     if(tradeInfo)
     {
         return (
@@ -126,6 +127,7 @@ function TradeChart(props) {
                 </ChartBack>
 
                 
+
                 <ChartTradeContainer>
 
                   <ChartTradeBuyContaimner>
