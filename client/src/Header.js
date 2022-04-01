@@ -80,35 +80,77 @@ const NavMenuSignIn = styled.div`
 `;
 
 function Header() {
-  return (
-    <>
-      <NavContainer>
-        <NavMenuBackBox>
-          <NavMenuBackColor />
-        </NavMenuBackBox>
-        <NavLink to="/">
-          <NavLogoBox src={Bono} />
-        </NavLink>
-        <NavMenuContainer>
-          <NavLink to="/explorer">
-            <NavMenuExplorer>EXPLORER</NavMenuExplorer>
+  var userid =  window.localStorage.getItem("user");
+
+  if(userid !== null){
+
+    return (
+      <>
+        <NavContainer>
+          <NavMenuBackBox>
+            <NavMenuBackColor />
+          </NavMenuBackBox>
+          <NavLink to="/">
+            <NavLogoBox src={Bono} />
           </NavLink>
-          <NavLink to="/trade">
-            <NavMenuTrade>TRADE</NavMenuTrade>
+          <NavMenuContainer>
+            <NavLink to="/explorer">
+              <NavMenuExplorer>EXPLORER</NavMenuExplorer>
+            </NavLink>
+            <NavLink to="/trade">
+              <NavMenuTrade>TRADE</NavMenuTrade>
+            </NavLink>
+            <NavLink to="/mypage">
+              <NavMenuMyPage>MyPage</NavMenuMyPage>
+            </NavLink>
+            <NavLink to="/logout">
+              <NavMenuMyPage>LogOut</NavMenuMyPage>
+            </NavLink>
+            {/* <NavLink to="/login">
+              <NavMenuSignIn>LogIn</NavMenuSignIn>
+            </NavLink>
+            <NavLink to="/join">
+              <NavMenuSignIn>JOIN</NavMenuSignIn>
+            </NavLink> */}
+          </NavMenuContainer>
+        </NavContainer>
+      </>
+    );
+
+  } else{
+
+    return (
+      <>
+        <NavContainer>
+          <NavMenuBackBox>
+            <NavMenuBackColor />
+          </NavMenuBackBox>
+          <NavLink to="/">
+            <NavLogoBox src={Bono} />
           </NavLink>
-          <NavLink to="/mypage">
-            <NavMenuMyPage>MyPage</NavMenuMyPage>
-          </NavLink>
-          <NavLink to="/login">
-            <NavMenuSignIn>LogIn</NavMenuSignIn>
-          </NavLink>
-          <NavLink to="/join">
-            <NavMenuSignIn>JOIN</NavMenuSignIn>
-          </NavLink>
-        </NavMenuContainer>
-      </NavContainer>
-    </>
-  );
+          <NavMenuContainer>
+            <NavLink to="/explorer">
+              <NavMenuExplorer>EXPLORER</NavMenuExplorer>
+            </NavLink>
+            <NavLink to="/trade">
+              <NavMenuTrade>TRADE</NavMenuTrade>
+            </NavLink>
+             {/* <NavLink to="/mypage">
+              <NavMenuMyPage>MyPage</NavMenuMyPage>
+            </NavLink> */}
+            <NavLink to="/login">
+              <NavMenuSignIn>LogIn</NavMenuSignIn>
+            </NavLink>
+            <NavLink to="/join">
+              <NavMenuSignIn>JOIN</NavMenuSignIn>
+            </NavLink> 
+          </NavMenuContainer>
+        </NavContainer>
+      </>
+    );
+
+  }
+
 }
 
 export default Header;

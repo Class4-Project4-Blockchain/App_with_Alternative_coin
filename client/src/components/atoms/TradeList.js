@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import styled from "styled-components";
 import TradeChart from './TradeChart';
 
@@ -7,13 +7,15 @@ const TradeList = () => {
 
     let obj = {};
     let newObj = [];
+    let defaultBTCPrice;
     const [objCoin, setObjCoin] = useState();
-    const [coinState, setCoinState] = useState("BTC");
+    const [coinNameState, setCoinNameState] = useState("BTC");
+    const [coinPriceState, setCoinPriceState] = useState(0);
 
     useEffect(async () => {
         await Axios.get("https://api.upbit.com/v1/ticker?markets=KRW-BTC&markets=KRW-ETH&markets=KRW-BCH&markets=KRW-LTC&markets=KRW-ETC&markets=KRW-EOS&markets=KRW-XRP&markets=KRW-DOGE&markets=KRW-BTG")
+        // await Axios.get("https://api.upbit.com/v1/ticker?markets=KRW-BTC&markets=KRW-BTG")
         .then((res) => {
-
             for (let i = 0; i < res.data.length; i++)
             {
                 let prevP = res.data[i].prev_closing_price;
@@ -50,12 +52,31 @@ const TradeList = () => {
                 // console.log("res.data[0].prev_closing_price = " , res.data[0].prev_closing_price);
                 
                 // console.log("res.data[0].signed_change_price = " , res.data[0].signed_change_price);
-        });
+            }).catch((err) => {
+                console.log("err = " , err);
+            })
+        // };
+        // setInterval(() => {
+        //     const inter = () => {
+        //         setObjCoin(newObj);
+        //     }
+        //     // obj = {};
+        //     // newObj = [];
+        //     // setObjCoin();
+        //     // setCountCheck(countCheck+1);
+        //     // setObjCoin(newObj);
+        //     return () => clearInterval(inter);
+        // } , 2000);
     },[]);
     
     return (
         <>
-            <TradeChart coinName={coinState} />
+            <TradeChart coinName={coinNameState} coinPrice={coinPriceState} />
+            
+
+            {/* <h1>Websocket Test</h1>
+            <h1>BitCoin {coinData}</h1> */}
+
             <ListBack>
                 <CoinNavBox>
                     <CoinNavImg />
@@ -68,7 +89,8 @@ const TradeList = () => {
 
                 {objCoin && objCoin.map((coin, index) => (
                     <CoinElementBox key={index} onClick={event=>{
-                        setCoinState(coin.name);
+                        setCoinNameState(coin.name);
+                        setCoinPriceState(coin.price);
                         event.preventDefault();
                         // console.log(index, coin.name);
                       }}>
@@ -82,7 +104,7 @@ const TradeList = () => {
                                         {coin.changeRate}
                                     </CoinChangeRate>
                                     <CoinChangePrice style={0 < coin.changePrice ? {color : 'red'} : {color : 'blue'}}>
-                                        {coin.changePrice}
+                                        {coin.changePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                     </CoinChangePrice>
                                 </CoinChange>
                                 <CoinTextPrice>
@@ -91,7 +113,6 @@ const TradeList = () => {
                             </CoinTextBox>
                     </CoinElementBox>
                 ))}
-                
             </ListBack>
             
         </>

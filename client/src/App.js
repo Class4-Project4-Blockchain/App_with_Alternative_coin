@@ -1,3 +1,4 @@
+/* App.js */
 import './assets/css/App.css';
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -8,6 +9,7 @@ import Login from './components/pages/Login';
 import "./assets/css/App.css";
 import Join from "./components/pages/Join";
 import Reference from "./components/pages/Reference";
+import Logout from "./components/pages/Logout";
 
 function App() {
   // const [Dbdata, SetDbdata] = useState([]);
@@ -66,11 +68,13 @@ function App() {
     <>
       <Routes>
         {/* <Route path="/" element={<Main />} /> */}
-        <Route path="/" element={<Reference />} />
+        <Route path="/" element={<Trade />} />
         <Route path="/trade" element={<Trade />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/*" element={<Trade />} />
       </Routes>
     </>
   );

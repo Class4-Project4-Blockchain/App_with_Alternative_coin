@@ -2,24 +2,18 @@ import { Chart } from "react-google-charts";
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import styled from "styled-components";
-
-
-const ChartBack = styled.div`
-    width: 1184px;
-    /* height: 400px; */
-    /* margin: auto; */
-    float: left;
-    border: 1px solid #80c7f2;
-`;
+import Button from './Button';
 
 // 양봉 - 저가. 시가. 종가. 고가
 // 음봉 - 고가. 시가. 종가. 저가
 function TradeChart(props) {
     
     const [currentCoinChart, setCurrentCoinChart] = useState("BTC");
+    const [currentCoinPrice, setCurrentCoinPrice] = useState(0);
 
     useEffect(()=>{
       setCurrentCoinChart(props.coinName);
+      setCurrentCoinPrice(props.coinPrice);
       console.log("리스트에서 선택한 프랍스 = ", props.coinName);
     },[props.coinName])
 
@@ -99,7 +93,7 @@ function TradeChart(props) {
   },[currentCoinChart]);
 
   const options = {
-    title: {currentCoinChart},
+    // title: {currentCoinChart},
     // title: "BitCoin",
     legend: "none",
     bar: { groupWidth: "80%" },
@@ -115,6 +109,12 @@ function TradeChart(props) {
     {
         return (
             <>
+            <ChartContainer>
+              <ChartInfo>
+                <ChartCurrentName>{currentCoinChart}</ChartCurrentName>
+              </ChartInfo>
+              
+
                 <ChartBack>
                     <Chart
                     chartType="CandlestickChart"
@@ -124,9 +124,332 @@ function TradeChart(props) {
                     options={options}
                     />
                 </ChartBack>
+
+                
+                <ChartTradeContainer>
+
+                  <ChartTradeBuyContaimner>
+                    <ChartTradeBuyText>매수</ChartTradeBuyText>
+                    <ChartTradeBuyPropsField>
+                      <ChartTradeBuyOwnCash>
+                      <ChartTradeBuyCurrPriceText>현재 가격</ChartTradeBuyCurrPriceText>
+                        <ChartTradeBuyCurrPriceProps>{currentCoinPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</ChartTradeBuyCurrPriceProps>
+                      </ChartTradeBuyOwnCash>
+                      <ChartTradeBuyCurrPrice>
+                      <ChartTradeBuyOwnCashText>보유 현금</ChartTradeBuyOwnCashText>
+                        <ChartTradeBuyOwnProps>보유 현금 Props</ChartTradeBuyOwnProps>
+                      </ChartTradeBuyCurrPrice>
+                      <ChartTradeBuyVolume>
+                        <ChartTradeBuyVolumeText>주문 금액</ChartTradeBuyVolumeText>
+                        <ChartTradeBuyVolumeInputBox>
+                         <ChartTradeBuyVolumeinput/> 원
+                          </ChartTradeBuyVolumeInputBox>
+                      </ChartTradeBuyVolume>
+                    </ChartTradeBuyPropsField>
+                    <ChartTradeBuyBtn>
+                      <BtnPosition>
+                        <Button size="lg" color="type1">
+                            매수
+                        </Button>
+                      </BtnPosition>
+                    </ChartTradeBuyBtn>
+                  </ChartTradeBuyContaimner>
+
+                  <ChartTradeCellContaimner>
+                  <ChartTradeCellText>매도</ChartTradeCellText>
+                    <ChartTradeCellPropsField>
+                      <ChartTradeCellOwnCoin>
+                      <ChartTradeCellCurrPriceText>현재 가격</ChartTradeCellCurrPriceText>
+                        <ChartTradeCellCurrPriceProps>{currentCoinPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</ChartTradeCellCurrPriceProps>
+                      </ChartTradeCellOwnCoin>
+                      <ChartTradeCellCurrPrice>
+                      <ChartTradeCellOwnCoinText>보유 코인</ChartTradeCellOwnCoinText>
+                        <ChartTradeCellOwnProps>보유 코인 Props</ChartTradeCellOwnProps>
+                      </ChartTradeCellCurrPrice>
+                      <ChartTradeCellVolume>
+                        <ChartTradeCellVolumeText>매도 수량</ChartTradeCellVolumeText>
+                        <ChartTradeCellVolumeInputBox>
+                          <ChartTradeCellVolumeInput /> 개
+                        </ChartTradeCellVolumeInputBox>
+                      </ChartTradeCellVolume>
+                    </ChartTradeCellPropsField>
+                    <ChartTradeCellBtn>
+                      <BtnPosition>
+                        <Button size="lg" color="type1">
+                            매도
+                        </Button>
+                      </BtnPosition>
+                    </ChartTradeCellBtn>
+                  </ChartTradeCellContaimner>
+
+                </ChartTradeContainer>
+              </ChartContainer>
+              
+
+                
             </>
         );
     }
 }
 
 export default TradeChart;
+
+
+const ChartContainer = styled.div`
+    width: 1184px;
+    float: left;
+    /* border: 1px solid #80c7f2; */
+`;
+const ChartInfo = styled.div`
+    width: 1184px;
+    height: 50px;
+    background-color: white;
+    border-top: 1px solid #80c7f2;
+    border-left: 1px solid #80c7f2;;
+    border-right: 1px solid #80c7f2;;
+`;
+// const ChartCurrentLogo = styled.div`
+//     width: 20%;
+//     height: 100%;
+//     background-color: yellow;
+//     float: left;
+//     margin-left: 10%;
+// `;
+const ChartCurrentName = styled.div`
+    width: 15%;
+    height: 50px;
+    float: left;
+    margin-left: 10%;
+    line-height: 50px;
+    font-size: 250%;
+    
+`;
+
+const ChartBack = styled.div`
+    width: 1184px;
+    border-bottom: 1px solid #80c7f2;
+    border-left: 1px solid #80c7f2;;
+    border-right: 1px solid #80c7f2;;
+`;
+
+const ChartTradeContainer = styled.div`
+    width: 1184px;
+    height: 325px;
+    /* background-color: white; */
+    margin-top: 15px;
+    /* border: 1px solid #80c7f2; */
+`;
+
+// --------------- buy ---------------
+
+const ChartTradeBuyContaimner = styled.div`
+  width: 40%;
+  height: 325px;
+  background-color: white;
+  float: left;
+  margin-left: 111px;
+  border: 1px solid #80c7f2;
+`;
+const ChartTradeBuyText = styled.div`
+  width: 100%;
+  height: 65px;
+  line-height: 65px;
+  /* background-color: yellow; */
+  text-align: center;
+  color: red;
+  font-size: 200%;
+  font-weight: 700;
+`;
+const ChartTradeBuyPropsField = styled.div`
+  width: 100%;
+  height: 195px;
+  /* background-color: red; */
+  font-weight: 600;
+`;
+
+const ChartTradeBuyOwnCash = styled.div`
+  height: 33.3%;
+  /* background-color: white; */
+`;
+const ChartTradeBuyOwnCashText = styled.div`
+  width: 35%;
+  height: 64px;
+  margin-left: 10%;
+  /* background-color: red; */
+  line-height: 64px;
+  float: left;
+`;
+const ChartTradeBuyOwnProps = styled.div`
+  width: 35%;
+  height: 64px;
+  /* background-color: pink; */
+  line-height: 64px;
+  float: left;
+  margin-left: 10%;
+  text-align: right;
+`;
+
+const ChartTradeBuyCurrPrice = styled.div`
+  height: 33.3%;
+  /* background-color: olive; */
+`;
+const ChartTradeBuyCurrPriceText = styled.div`
+  width: 35%;
+  height: 64px;
+  margin-left: 10%;
+  /* background-color: yellow; */
+  line-height: 64px;
+  float: left;
+`;
+const ChartTradeBuyCurrPriceProps = styled.div`
+  width: 35%;
+  height: 64px;
+  /* background-color: green; */
+  line-height: 64px;
+  float: left;
+  margin-left: 10%;
+  text-align: right;
+`;
+
+const ChartTradeBuyVolume = styled.div`
+  height: 33.3%;
+  /* background-color: purple; */
+`;
+const ChartTradeBuyVolumeText = styled.div`
+  width: 35%;
+  height: 64px;
+  margin-left: 10%;
+  /* background-color: brown; */
+  line-height: 64px;
+  float: left;
+`;
+const ChartTradeBuyVolumeInputBox = styled.div`
+  width: 35%;
+  height: 64px;
+  /* background-color: blue; */
+  line-height: 64px;
+  float: left;
+  margin-left: 10%;
+  text-align: right;
+`;
+const ChartTradeBuyVolumeinput = styled.input`
+  width: 120px;
+`;
+
+const ChartTradeBuyBtn = styled.div`
+  width: 100%;
+  height: 20%;
+  /* background-color: pink; */
+  position : relative;
+`;
+
+
+// --------------- cell ---------------
+const ChartTradeCellContaimner = styled.div`
+    width: 40%;
+    height: 325px;
+    background-color: white;
+    float: left;
+    margin-left: 15px;
+    border: 1px solid #80c7f2;
+`;
+
+const ChartTradeCellText = styled.div`
+  width: 100%;
+  height: 65px;
+  line-height: 65px;
+  /* background-color: yellow; */
+  text-align: center;
+  color: blue;
+  font-size: 200%;
+  font-weight: 700;
+`;
+const ChartTradeCellPropsField = styled.div`
+  width: 100%;
+  height: 195px;
+  /* background-color: red; */
+  font-weight: 600;
+`;
+
+const ChartTradeCellOwnCoin = styled.div`
+  height: 33.3%;
+  /* background-color: white; */
+`;
+const ChartTradeCellOwnCoinText = styled.div`
+  width: 35%;
+  height: 64px;
+  margin-left: 10%;
+  /* background-color: red; */
+  line-height: 64px;
+  float: left;
+`;
+const ChartTradeCellOwnProps = styled.div`
+  width: 35%;
+  height: 64px;
+  /* background-color: pink; */
+  line-height: 64px;
+  float: left;
+  margin-left: 10%;
+  text-align: right;
+`;
+
+const ChartTradeCellCurrPrice = styled.div`
+  height: 33.3%;
+  /* background-color: olive; */
+`;
+const ChartTradeCellCurrPriceText = styled.div`
+  width: 35%;
+  height: 64px;
+  margin-left: 10%;
+  /* background-color: yellow; */
+  line-height: 64px;
+  float: left;
+`;
+const ChartTradeCellCurrPriceProps = styled.div`
+  width: 35%;
+  height: 64px;
+  /* background-color: green; */
+  line-height: 64px;
+  float: left;
+  margin-left: 10%;
+  text-align: right;
+`;
+
+const ChartTradeCellVolume = styled.div`
+  height: 33.3%;
+  /* background-color: purple; */
+`;
+const ChartTradeCellVolumeText = styled.div`
+  width: 35%;
+  height: 64px;
+  margin-left: 10%;
+  /* background-color: brown; */
+  line-height: 64px;
+  float: left;
+`;
+const ChartTradeCellVolumeInputBox = styled.div`
+  width: 35%;
+  height: 64px;
+  /* background-color: blue; */
+  line-height: 64px;
+  float: left;
+  margin-left: 10%;
+  text-align: right;
+`;
+const ChartTradeCellVolumeInput = styled.input`
+  width: 150px;
+`;
+
+const ChartTradeCellBtn = styled.div`
+  width: 100%;
+  height: 20%;
+  /* background-color: pink; */
+  position : relative;
+`;
+
+const BtnPosition = styled.div`
+  position: absolute;
+  left: 50%;
+  top: 50%; 
+  transform: translate(-50%,-50%);
+`;

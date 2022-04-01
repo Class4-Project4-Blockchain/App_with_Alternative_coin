@@ -129,6 +129,9 @@ const selectList = ["bonocoin", "bitcoin", "etherium", "litecoin"];
   const handleSelect = (e) => {
     setSelected(e.target.value);
   };
+
+  var userid=window.localStorage.getItem('user') //로그인정보 로컬에서 빼오기
+  console.log(userid);
     return (
       <>
           <MyPageBox>
@@ -137,14 +140,14 @@ const selectList = ["bonocoin", "bitcoin", "etherium", "litecoin"];
               <MyPageList>
                 아이디
                 <li>                
-                  <input value={Dbdata.no || ''} onChange={handlechange} style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
+                  <input value={userid || ''} onChange={handlechange} style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
                   </input>       
                 </li>
-                이메일
+                {/* 이메일
                 <li> 
                   <input value={Dbdata.email || ''} onChange={handlechange} style={{width : '353px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
                   </input> 
-                </li> 
+                </li>  */}
                 코인 보유 수량
                 <li>                
                 <select onChange={handleSelect} value={Selected} style={{width : '40%' ,marginTop : '10px',marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
@@ -199,7 +202,7 @@ const selectList = ["bonocoin", "bitcoin", "etherium", "litecoin"];
                   <input placeholder='내역찾을 id입력' name="Bvalue" value={Bvalue || ''} onChange={handlechange4} style={{width : '303px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '12px', borderRadius: '10px'}}>
                   </input>  
                   <button type="submit" disabled={disabled} style={{marginLeft : '10px', width : '170px' ,marginBottom : '20px' , border : '1px solid #23518C', padding: '10px', borderRadius: '10px'}} >내역 검색</button>
-                  최근 송금내역(latest blockhash + 해당 txid)
+                  최근 거래내역(latest blockhash + 해당 txid)
                   <input value={Cvalue || ''} onChange={handlechange4} style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>
                   <input value={Dvalue || ''} onChange={handlechange4} style={{width : '99%', borderWidth: '0', height: '25px', borderRadius: '6px'}}/>
                   </form> 

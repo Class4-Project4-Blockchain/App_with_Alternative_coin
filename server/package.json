@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "react": "cd .. && cd client && npm i && yarn start",
-    "server": "nodemon server.js",
+    "react": "cd .. && cd client && npm i && npm start",
+    "server": "npm i && nodemon server.js",
     "start": "concurrently -k \"npm run server\" \"npm run react\""
   },
   "author": "",
@@ -22,7 +22,6 @@
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.15",
-    "request": "^2.88.2",
-    "yarn": "^1.22.18"
+    "request": "^2.88.2"
   }
 }

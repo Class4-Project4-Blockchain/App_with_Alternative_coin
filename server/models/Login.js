@@ -1,4 +1,4 @@
-const getConn = require("../util/db");
+const getConn = require("../utils/db");
 
 module.exports = {
     AccountCheck: {
@@ -26,9 +26,11 @@ module.exports = {
             // console.log("DAO-> hashed pwd chk : ", pwd);
             return new Promise((resolve, reject) => {
                 getConn((conn) => {
+                    if(pwd==undefined) return "undefine!"
                     try {
                         let sQuery = `SELECT pwd FROM users where id='${userid}'; `; 
                         conn.query(sQuery, (err, result) => { 
+                            
                             return resolve(result[0]["pwd"]);
                         });
                         conn.release();

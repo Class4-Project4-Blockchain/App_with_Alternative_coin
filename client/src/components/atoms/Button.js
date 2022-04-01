@@ -70,7 +70,7 @@ const StyledButton = styled.button`
 
   &:active,
   &:hover {
-    background: var(--button-hover-bg-color, #025ce2);
+    background: var(--button-hover-bg-color, #23518C);
   }
 `;
 
