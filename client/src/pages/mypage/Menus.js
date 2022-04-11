@@ -5,14 +5,14 @@ import styled from "styled-components";
 const BrowserBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   text-decoration: none;
   font-size: 0.7em;
 
   .menulist {
-    margin: 0 auto;
-    padding: 0.4em 4em;
-    width: 18em;
+    margin: 1em auto;
+    padding: 0.4em 1.5em;
+    width: 12em;
     height: 2em;
     font-size: 01.1rem;
     display: flex;
@@ -42,7 +42,7 @@ const NonBrowser = styled.div`
     font-size: 1.5em;
     display: flex;
     align-items: center;
-    border: dotted 0.5px;
+    justify-content: center;
   }
   .menusort {
     justify-content: center;
@@ -63,18 +63,13 @@ export default function Contents() {
   /* getDatas */
   const getmenulist = [
     // api from DB
-    { idx: 1, title: "보유코인", memo: "memo" },
-    { idx: 2, title: "거래내역", memo: "memo" },
-    { idx: 3, title: "미체결", memo: "memo" },
-    { idx: 4, title: "입출금대기", memo: "memo" }
+    { idx: 1, title: "보유코인", url:"", memo: "memo" },
+    { idx: 2, title: "거래내역", url:"", memo: "memo" },
+    { idx: 3, title: "미체결", url:"", memo: "memo" },
+    { idx: 4, title: "입출금대기", url:"", memo: "memo" }
   ];
   const data = getmenulist; // axios.GET
 
-  let Tsort = () => {
-    if (getmenulist.idx == 2) {
-      return <br />;
-    }
-  };
   if (window.innerWidth < 800) {
     return (
       <>
@@ -85,7 +80,7 @@ export default function Contents() {
                 <div className="menulist">{i.title}</div>
               </a>
             ))}
-            <Tsort />
+            
           </div>
         </NonBrowser>
       </>
