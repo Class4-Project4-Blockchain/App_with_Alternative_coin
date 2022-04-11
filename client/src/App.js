@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Main from './components/pages/Main';
 import Trade from './components/pages/Trade';
-import Mypage from './components/pages/Mypage';
+import Mypage from './pages/mypage/Mypage'; // 마이페이지 거래소버전 (기존경로 : ./components/pages/Mypage)
 import Login from './components/pages/Login';
 import "./assets/css/App.css";
 import Join from "./components/pages/Join";

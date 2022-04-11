@@ -72,6 +72,10 @@ function Inputs() {
   const onSubmit = (e)=>{
     e.preventDefault();
     console.log("Inputs :", id, pw);
+    if(id=="test" && pw=="1234"){ // 즉시 테스트계정
+      window.location.replace('/trade');
+      window.localStorage.setItem('user',  "test");
+    }
     axios.post("http://localhost:3001/users/login", data)  
     .then(res =>{
       console.log(res);
