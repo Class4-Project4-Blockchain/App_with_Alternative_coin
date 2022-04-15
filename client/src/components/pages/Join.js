@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+// Irequire('dotenv').config({ path: __dirname + '../../../../server/utils/.env' });
 
 const Wrapper = styled.section`
   margin: 2em auto;
